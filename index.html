@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roberto Hanet — Creative Developer & Audio Producer</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- =========================================================
+       HEADER / HERO
+       ========================================================= -->
+  <header class="hero">
+    <nav class="nav">
+      <span class="nav-logo">RH</span>
+      <ul class="nav-links">
+        <li><a href="#music">Music</a></li>
+        <li><a href="#software">Software</a></li>
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Hello, I'm</p>
+      <h1 class="hero-name">Roberto Hanet</h1>
+      <h2 class="hero-title">Creative Developer &amp; Audio Producer</h2>
+      <p class="hero-bio">
+        I live at the intersection of sound and code. From crafting Techno beats in FL Studio
+        to shipping Android apps and working on the cutting edge of AI model improvement —
+        I build things that resonate, in every sense of the word.
+      </p>
+      <div class="hero-cta">
+        <a href="#music" class="btn btn-primary">Hear My Work</a>
+        <a href="#software" class="btn btn-ghost">See My Projects</a>
+      </div>
+    </div>
+
+    <!-- Decorative orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </header>
+
+
+  <!-- =========================================================
+       AUDIO & MUSIC SECTION
+       ========================================================= -->
+  <section id="music" class="section">
+    <div class="container">
+      <h2 class="section-title">Music &amp; Audio</h2>
+      <p class="section-sub">
+        Two channels, two worlds —
+        <a href="https://www.youtube.com/@ZenOm.-." target="_blank" rel="noopener">ZenOm</a>
+        for organic productions and
+        <a href="https://www.youtube.com/@ZenArtIntelligence" target="_blank" rel="noopener">ZenArt Intelligence</a>
+        for AI-driven experiments.
+      </p>
+
+      <!-- Single embedded player -->
+      <div class="player-wrapper">
+        <div class="player-frame">
+          <iframe
+            id="yt-player"
+            src="https://www.youtube.com/embed/gCgtXpk1dJY?rel=0"
+            title="YouTube music player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <!-- Track playlist / navigator -->
+        <div class="playlist">
+          <!-- ── ADD NEW TRACKS HERE ── copy a <button> block and update data-id, title, meta -->
+          <button class="track active" data-id="gCgtXpk1dJY" onclick="playTrack(this)">
+            <span class="track-num">01</span>
+            <div class="track-info">
+              <strong>Unnamed Beat</strong>
+              <span>Hip-Hop · FL Studio &amp; Audacity · Prod. Anno Domini Nation</span>
+            </div>
+          </button>
+
+          <button class="track" data-id="B-e28FVKEqE" onclick="playTrack(this)">
+            <span class="track-num">02</span>
+            <div class="track-info">
+              <strong>Soundway Athens Session</strong>
+              <span>Hip-Hop · Voice &amp; Lyrics · Prod. TemperBeats · MixMaster Rec</span>
+            </div>
+          </button>
+
+          <button class="track" data-id="ELRvIqxxGPc" onclick="playTrack(this)">
+            <span class="track-num">03</span>
+            <div class="track-info">
+              <strong>Utility Session</strong>
+              <span>Hip-Hop · Voice &amp; Lyrics · Prod. UtilityBeats</span>
+            </div>
+          </button>
+
+          <button class="track" data-id="u00D9qx-4-Q" onclick="playTrack(this)">
+            <span class="track-num">04</span>
+            <div class="track-info">
+              <strong>Electronic Experiment</strong>
+              <span>Electronic · FL Studio · Loops, Samples &amp; Sounds · BMW CC video</span>
+            </div>
+          </button>
+
+          <button class="track" data-id="BppiBGCF99c" onclick="playTrack(this)">
+            <span class="track-num">05</span>
+            <div class="track-info">
+              <strong>First Techno Release</strong>
+              <span>Techno · FL Studio · Apollo 11 launch recording intro</span>
+            </div>
+          </button>
+
+          <button class="track" data-id="YFXe1ps5akA" onclick="playTrack(this)">
+            <span class="track-num">06</span>
+            <div class="track-info">
+              <strong>Techno &amp; The Brain</strong>
+              <span>Techno · AI-assisted · Lyrics based on research about Techno's effect on the human brain</span>
+            </div>
+          </button>
+
+          <button class="track" data-id="aL7sn1HsxXk" onclick="playTrack(this)">
+            <span class="track-num">07</span>
+            <div class="track-info">
+              <strong>The Illusion We Call Reality</strong>
+              <span>Electronic · AI-assisted · Explores how the brain constructs our perceived reality</span>
+            </div>
+          </button>
+
+          <button class="track" data-id="FkkpA2NvBFs" onclick="playTrack(this)">
+            <span class="track-num">08</span>
+            <div class="track-info">
+              <strong>Techno Mariachi</strong>
+              <span>Techno · Mariachi · AI blend · Genre-bending fusion experiment</span>
+            </div>
+          </button>
+          <!-- ── END OF TRACKS ── -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       SOFTWARE & APPS SECTION
+       ========================================================= -->
+  <section id="software" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Software &amp; Apps</h2>
+      <p class="section-sub">From game mechanics to camera tools — built for real users.</p>
+
+      <div class="cards-grid">
+
+        <!-- ── ADD NEW PROJECT CARDS HERE ── copy a <article> block -->
+
+        <!-- Card: PsychedelicLines -->
+        <article class="card">
+          <div class="card-icon">
+            <img src="assets/PsychedelicLines.jpg" alt="PsychedelicLines icon" />
+          </div>
+          <div class="card-body">
+            <span class="card-badge card-badge--live">Live on Play Store</span>
+            <h3>PsychedelicLines</h3>
+            <p>
+              A hypnotic, psychedelic twist on the classic puzzle genre.
+              Guide lines, chase colours, and lose yourself in the visuals.
+            </p>
+            <div class="card-tags">
+              <span>Android</span>
+              <span>Puzzle</span>
+              <span>Unity</span>
+            </div>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.psychedelic_tetris.app&pcampaignid=web_share"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-primary btn-sm"
+            >View on Google Play</a>
+          </div>
+        </article>
+
+        <!-- Card: CamVerse -->
+        <article class="card">
+          <div class="card-icon">
+            <img src="assets/CamVerse.webp" alt="CamVerse icon" />
+          </div>
+          <div class="card-body">
+            <span class="card-badge card-badge--dev">In Development</span>
+            <h3>CamVerse</h3>
+            <p>
+              An intelligent camera app pushing the boundaries of mobile photography
+              with AI-powered features. Stay tuned for the public beta.
+            </p>
+            <div class="card-tags">
+              <span>Android</span>
+              <span>Camera</span>
+              <span>AI</span>
+            </div>
+            <span class="btn btn-ghost btn-sm btn-disabled">Coming Soon</span>
+          </div>
+        </article>
+
+        <!-- Card: TimbrOra -->
+        <article class="card">
+          <div class="card-icon">
+            <img src="assets/TimbrOra.png" alt="TimbrOra icon" />
+          </div>
+          <div class="card-body">
+            <span class="card-badge card-badge--live">Live</span>
+            <h3>TimbrOra.it</h3>
+            <p>
+              A web platform built to simplify and modernise a traditionally
+              paper-heavy workflow — clean UI, practical utility.
+            </p>
+            <div class="card-tags">
+              <span>Web</span>
+              <span>SaaS</span>
+            </div>
+            <a
+              href="https://timbrora.it"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-primary btn-sm"
+            >Visit Website</a>
+          </div>
+        </article>
+
+        <!-- ── END OF PROJECT CARDS ── -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       EXPERTISE GRID
+       ========================================================= -->
+  <section id="expertise" class="section">
+    <div class="container">
+      <h2 class="section-title">What I Do</h2>
+      <p class="section-sub">
+        A year of professional AI annotation &amp; labelling (RLHF, TTS/STT, generative image/video/voice models, LLM response improvement) sits
+        behind every project.
+      </p>
+
+      <div class="expertise-grid">
+
+        <!-- ── ADD NEW EXPERTISE ITEMS HERE ── -->
+
+        <div class="expertise-item">
+          <div class="expertise-icon">🎛</div>
+          <h3>Audio Production</h3>
+          <p>FL Studio, Audacity, loops, sampling, mixing &amp; mastering workflows.</p>
+        </div>
+
+        <div class="expertise-item">
+          <div class="expertise-icon">🔊</div>
+          <h3>Sound Design</h3>
+          <p>Creating textures, atmospheres and signature sounds from scratch or from found audio.</p>
+        </div>
+
+        <div class="expertise-item">
+          <div class="expertise-icon">📱</div>
+          <h3>App Development</h3>
+          <p>Android apps shipped to the Play Store; full product cycle from concept to release.</p>
+        </div>
+
+        <div class="expertise-item">
+          <div class="expertise-icon">🧪</div>
+          <h3>Beta Testing</h3>
+          <p>Systematic QA, edge-case hunting, and structured feedback for mobile &amp; web products.</p>
+        </div>
+
+        <div class="expertise-item">
+          <div class="expertise-icon">🤖</div>
+          <h3>AI Training &amp; Annotation</h3>
+          <p>RLHF, TTS/STT labelling, image &amp; video model evaluation, LLM response rating.</p>
+        </div>
+
+        <div class="expertise-item">
+          <div class="expertise-icon">🎮</div>
+          <h3>Game Development</h3>
+          <p>Indie mobile games with polished UX and mechanics designed around player feel.</p>
+        </div>
+
+        <!-- ── END OF EXPERTISE ITEMS ── -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       CONTACT / FOOTER
+       ========================================================= -->
+  <footer id="contact" class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="nav-logo">RH</span>
+        <p>Let's build something that sounds as good as it looks.</p>
+      </div>
+
+      <div class="footer-links">
+        <!-- ── ADD / UPDATE SOCIAL LINKS HERE ── -->
+        <a href="https://www.youtube.com/@ZenOm.-." target="_blank" rel="noopener" aria-label="YouTube ZenOm">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg>
+          ZenOm
+        </a>
+        <a href="https://www.youtube.com/@ZenArtIntelligence" target="_blank" rel="noopener" aria-label="YouTube ZenArtIntelligence">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg>
+          ZenArt Intelligence
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.psychedelic_tetris.app" target="_blank" rel="noopener" aria-label="Google Play">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 1.1 13.8 12 3.6 22.9A2 2 0 0 1 3 22V2a2 2 0 0 1 .6-.9zm17 9.4-2.8-1.6-3.1 3.1 3.1 3.1 2.8-1.6a1.5 1.5 0 0 0 0-2.6v-.4zM5.1 2.2l9 9-2.8 2.8-6.2-3.5V4.9l.1-.1zM5.1 21.8v-8.3l6.2-3.5 2.8 2.8-9 9z"/></svg>
+          Google Play
+        </a>
+        <a href="mailto:hanetroberto@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          Email me
+        </a>
+        <!-- ── END OF SOCIAL LINKS ── -->
+      </div>
+    </div>
+    <p class="footer-copy">&copy; <span id="year"></span> Roberto Hanet. Built with intention.</p>
+  </footer>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+  <script>
+    // Auto-update copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // YouTube player switcher
+    function playTrack(btn) {
+      const id = btn.dataset.id;
+      document.getElementById('yt-player').src =
+        'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+
+      // Update active state
+      document.querySelectorAll('.track').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    // Smooth scroll offset for fixed nav
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
