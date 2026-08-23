@@ -8,7 +8,6 @@ al suo posto e resta comunque pubblicabile.
 
 | File | Step | Cosa deve inquadrare |
 |------|------|----------------------|
-| `01-play-test.jpg` | 2 | La pagina del test chiuso su Play Store, con il pulsante per accettare l'invito. **Formato largo** (screenshot desktop o ritagliato 16:9). |
 | `02-meta-ai-glasses.jpg` | 3 | Meta AI → menu → **Glasses**, con gli occhiali elencati e connessi. |
 | `03-meta-ai-home.jpg` | 3 | ✅ presente — Home Meta AI con la pillola batteria occhiali in alto a destra e il menu ☰ evidenziato. |
 | `04-meta-ai-menu.jpg` | 4 | ✅ presente — Drawer aperto con l'**ingranaggio** evidenziato in basso. |
@@ -24,6 +23,6 @@ al suo posto e resta comunque pubblicabile.
 
 - **Formato**: `.jpg`. Se ne hai in `.png`, o li converti o dimmelo e cambio i riferimenti.
 - **Verticali**: gli screenshot del telefono restano verticali, la pagina li limita a 320px di larghezza.
-- **Orizzontali**: solo `01-play-test.jpg` è in `.shot.wide` (max 640px).
+- **Orizzontali**: nessuno al momento. Se ne serve uno, la classe è `.shot.wide` (max 640px).
 - **Evidenziazioni**: continua con il pennarello verde come hai già fatto — è leggibile e coerente.
 - **Dati personali**: controlla che non compaiano nomi di chat, notifiche o email. Nel `04` le chat sono già oscurate.
