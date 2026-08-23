@@ -202,12 +202,17 @@
           This is the step that decides whether any of this works. Two actions, in this order.
         </p>
 
-        <h3>6a — Enable Developer Mode</h3>
+        <h3>6a — Reveal Developer Mode, then switch it on</h3>
         <p>
-          Switch <strong>Developer Mode</strong> on. Its description reads
-          <em>"If you are developing for Meta AI Glasses, Developer Mode allows you to use features
-          required for app development"</em>. Turning it on reveals a new row underneath: your
-          glasses, with their DAT status.
+          <strong>Developer Mode is hidden until you ask for it.</strong> On a fresh phone the App
+          info screen shows only the app version and language — no Developer Mode anywhere. To
+          bring it out, <strong>tap "App version" four times in a row</strong>, the version number
+          at the top of the screen. The Developer Mode block then appears underneath it.
+        </p>
+        <p>
+          Now switch it on. Its description reads <em>"If you are developing for Meta AI Glasses,
+          Developer Mode allows you to use features required for app development"</em>. Turning it
+          on reveals one more row: your glasses, with their DAT status.
         </p>
 
         <h3>6b — Install the DAT app on the glasses</h3>
@@ -219,7 +224,7 @@
 
         <figure class="shot">
           <img src="shots/06-developer-mode-dat.jpg" alt="App info screen with Developer Mode enabled and the DAT install button" loading="lazy" />
-          <figcaption><b>Developer Mode on, DAT still missing.</b> "DAT SDK version: Not installed" is the exact state in which the glasses reject every connection attempt — silently, with no error you can see from CamVerse. Tap <b>Install</b>.</figcaption>
+          <figcaption><b>Developer Mode on, DAT still missing.</b> The four marks on <em>App version</em> are the four taps that revealed this section. Below it, "DAT SDK version: Not installed" is the exact state in which the glasses reject every connection attempt — silently, with no error you can see from CamVerse. Tap <b>Install</b>.</figcaption>
         </figure>
 
         <div class="callout callout--warn">
@@ -237,9 +242,11 @@
 
         <div class="callout callout--crit">
           <span class="callout-label">No Developer Mode section?</span>
-          If the App info screen has no Developer Mode block at all, your Meta account is almost
-          certainly not on the tester list yet. Go back to <a href="#step-1">step 1</a> — this is
-          not something you can enable on your side.
+          First, make sure you actually tapped <strong>App version</strong> four times — the block
+          does not exist until you do, and four deliberate taps work better than a fast drumroll.
+          If it still refuses to appear after that, your Meta account is probably not on the tester
+          list yet: go back to <a href="#step-1">step 1</a>, since that part is not something you
+          can enable from your side.
         </div>
       </article>
 
@@ -361,6 +368,11 @@
                 <td><b>Nothing happens at all</b></td>
                 <td>The <b>DAT app is missing on the glasses</b>. This is the number-one cause and it is invisible from CamVerse.</td>
                 <td><a href="#step-6">Step 6</a>. Confirm the DAT row shows a version, not "Not installed".</td>
+              </tr>
+              <tr>
+                <td><b>No Developer Mode in Meta AI</b></td>
+                <td>The section is <b>hidden by default</b>. It is not missing — it just has not been revealed yet.</td>
+                <td>Tap <b>App version</b> four times on the App info screen. See <a href="#step-6">step 6a</a>.</td>
               </tr>
               <tr>
                 <td><b>No authorisation screen ever appears</b></td>
