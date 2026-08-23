@@ -111,6 +111,14 @@ ul { list-style: none; }
 
 .btn-sm { padding: 0.5rem 1rem; font-size: 0.82rem; margin-top: 1rem; }
 
+/* Two or more buttons side by side at the bottom of a card */
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.card-actions .btn-sm { margin-top: 1rem; }
+
 .btn-disabled {
   opacity: 0.45;
   cursor: not-allowed;

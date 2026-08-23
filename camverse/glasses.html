@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CamVerse — Ray-Ban Meta Setup Guide</title>
+  <meta name="description" content="Step-by-step guide to connect Ray-Ban Meta glasses to CamVerse: developer mode, the DAT app on the glasses, permissions and troubleshooting." />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="camverse.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html"><span class="nav-logo">CamVerse</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="glasses.html">Setup Guide</a></li>
+      <li><a href="#access">Get Access</a></li>
+      <li><a href="../">Portfolio</a></li>
+    </ul>
+  </nav>
+
+  <!-- =========================================================
+       PAGE HEADER
+       ========================================================= -->
+  <header class="page-top">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">CamVerse</a> &rsaquo; Setup Guide</p>
+      <h1 class="page-title">Connect your Ray-Ban Meta glasses</h1>
+      <p class="page-lead">
+        The glasses will not stream to any third-party app out of the box. Three things have to be
+        true first, and only one of them lives inside CamVerse. This page walks through all three,
+        in order, with the exact screens you will see.
+      </p>
+      <div class="meta-strip">
+        <span>~15 minutes</span>
+        <span>Android 12 or newer</span>
+        <span>Ray-Ban Meta (all generations)</span>
+        <span>Updated August 2026</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:1rem;">
+    <div class="container">
+
+      <!-- ---------- Why it fails ---------- -->
+      <div class="callout callout--crit">
+        <span class="callout-label">Read this first</span>
+        The single most common reason the glasses never connect is that the
+        <strong>DAT app is not installed on the glasses themselves</strong>. It is a separate
+        component from the Meta AI phone app, it is off by default, and nothing in CamVerse can
+        install it for you. That is <a href="#step-6">step 6</a> — do not skip it.
+      </div>
+
+      <!-- ---------- Requirements ---------- -->
+      <h2 class="section-title" style="margin-top:3rem;">What you need</h2>
+      <ul class="checklist">
+        <li><span class="tick">✓</span><span><b>Ray-Ban Meta glasses</b>, charged above 30% and <b>unfolded</b>. Folded glasses refuse every streaming request — the hinge sensor gates the camera.</span></li>
+        <li><span class="tick">✓</span><span><b>An Android phone on version 12 or newer.</b> CamVerse will not install below that.</span></li>
+        <li><span class="tick">✓</span><span><b>The Meta AI app</b>, updated, with your glasses already paired to it.</span></li>
+        <li><span class="tick">✓</span><span><b>A Meta account on the CamVerse tester list.</b> Meta's Wearables Device Access Toolkit is still in developer preview, so I have to add each account by hand — see step 1.</span></li>
+      </ul>
+
+      <!-- ---------- TOC ---------- -->
+      <nav class="toc">
+        <h2>Steps</h2>
+        <ol>
+          <li><a href="#step-1">Request access with your Meta account</a></li>
+          <li><a href="#step-2">Join the closed test and install CamVerse</a></li>
+          <li><a href="#step-3">Pair the glasses in the Meta AI app</a></li>
+          <li><a href="#step-4">Open the Meta AI settings</a></li>
+          <li><a href="#step-5">Go to App info</a></li>
+          <li><a href="#step-6">Turn on Developer Mode and install DAT on the glasses</a></li>
+          <li><a href="#step-7">Open CamVerse and tap the glasses</a></li>
+          <li><a href="#step-8">Authorise CamVerse on your Meta account</a></li>
+          <li><a href="#step-9">Allow camera access</a></li>
+          <li><a href="#step-10">You are connected</a></li>
+        </ol>
+      </nav>
+
+      <!-- =====================================================
+           STEP 1
+           ===================================================== -->
+      <article class="step" id="step-1">
+        <span class="step-num">1</span>
+        <h2>Request access with your Meta account</h2>
+        <p>
+          Meta's toolkit only lets <strong>allow-listed accounts</strong> register a third-party app
+          against their glasses. Until your account is on that list, the authorisation screen in
+          step 8 will simply never appear, no matter how correct everything else is.
+        </p>
+        <p>
+          Send me the <strong>email address of the Meta account your glasses are paired to</strong>
+          — the one you use in the Meta AI app. I add it to the CamVerse tester list on the Meta
+          Wearables console, and reply when it is active.
+        </p>
+
+        <div class="center" style="margin:2rem 0;">
+          <!-- Access request form -->
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdb17E0DVoMO4E3pOJb0JoAPdAHumBb5ReT_EbNHSe_b5tEgg/viewform" target="_blank" rel="noopener"
+             class="btn btn-primary">Request glasses access</a>
+        </div>
+
+        <div class="callout callout--note">
+          <span class="callout-label">What I do with it</span>
+          The address is used for one thing only: adding you to the tester list on the Meta
+          Wearables console so the glasses accept CamVerse. It is not published anywhere, not
+          shared with anyone, and not used to send you anything else. Ask me and I remove it.
+        </div>
+      </article>
+
+      <!-- =====================================================
+           STEP 2
+           ===================================================== -->
+      <article class="step" id="step-2">
+        <span class="step-num">2</span>
+        <h2>Join the closed test and install CamVerse</h2>
+        <p>
+          CamVerse is distributed through a <strong>Google Play closed test</strong>. Open the
+          tester link below on the phone you will actually use, accept the invitation, then install
+          the app from the Play Store page that follows.
+        </p>
+        <div class="center" style="margin:2rem 0;">
+          <a href="https://play.google.com/apps/testing/com.zenom.camverse" target="_blank" rel="noopener" class="btn btn-primary">Join the closed test</a>
+          <a href="https://play.google.com/store/apps/details?id=com.zenom.camverse" target="_blank" rel="noopener" class="btn btn-ghost">Play Store page</a>
+        </div>
+
+        <figure class="shot wide">
+          <img src="shots/01-play-test.jpg" alt="Google Play closed test opt-in page for CamVerse" loading="lazy" />
+          <figcaption><b>Accept the invitation.</b> If the Play Store still shows the public listing instead of the test build, wait a few minutes and pull to refresh — the switch is not instant.</figcaption>
+        </figure>
+
+        <div class="callout callout--warn">
+          <span class="callout-label">Same account, both places</span>
+          Use the same Google account you accepted the test with. If you have several accounts on
+          the phone, Play will quietly install nothing at all.
+        </div>
+      </article>
+
+      <!-- =====================================================
+           STEP 3
+           ===================================================== -->
+      <article class="step" id="step-3">
+        <span class="step-num">3</span>
+        <h2>Pair the glasses in the Meta AI app</h2>
+        <p>
+          Everything from here happens in the <strong>Meta AI app</strong>, not in CamVerse. Your
+          glasses must already be paired there and reachable — CamVerse talks to the glasses
+          <em>through</em> Meta AI, never directly.
+        </p>
+
+        <figure class="shot">
+          <img src="shots/02-meta-ai-glasses.jpg" alt="Glasses section of the Meta AI app showing the paired glasses" loading="lazy" />
+          <figcaption><b>Menu &rsaquo; Glasses.</b> Your pair should be listed and connected. If it is not, finish the normal Meta pairing first — this guide cannot help until that works.</figcaption>
+        </figure>
+
+        <figure class="shot">
+          <img src="shots/03-meta-ai-home.jpg" alt="Meta AI app home screen with the glasses battery indicator" loading="lazy" />
+          <figcaption><b>The proof that the link is alive:</b> the glasses pill in the top-right corner showing a battery percentage. No pill means Meta AI is not talking to your glasses, and nothing further will work. Open the menu with the ☰ button, top-left.</figcaption>
+        </figure>
+      </article>
+
+      <!-- =====================================================
+           STEP 4
+           ===================================================== -->
+      <article class="step" id="step-4">
+        <span class="step-num">4</span>
+        <h2>Open the Meta AI settings</h2>
+        <p>
+          In the side menu, tap the <strong>gear icon</strong> at the bottom of the panel — not your
+          profile picture next to it.
+        </p>
+
+        <figure class="shot">
+          <img src="shots/04-meta-ai-menu.jpg" alt="Meta AI side menu with the settings gear highlighted" loading="lazy" />
+          <figcaption><b>The gear, bottom-right of the drawer.</b> The <em>Glasses</em> entry higher up is the normal device screen — useful, but not where developer mode lives.</figcaption>
+        </figure>
+      </article>
+
+      <!-- =====================================================
+           STEP 5
+           ===================================================== -->
+      <article class="step" id="step-5">
+        <span class="step-num">5</span>
+        <h2>Go to App info</h2>
+        <p>
+          Scroll down to the <strong>App settings</strong> block and tap <strong>App info</strong>.
+        </p>
+
+        <figure class="shot">
+          <img src="shots/05-settings-app-info.jpg" alt="Meta AI settings screen with App info highlighted" loading="lazy" />
+          <figcaption><b>App settings &rsaquo; App info.</b> It sits between <em>Data &amp; privacy</em> and <em>Legal &amp; safety</em>. This screen looks unremarkable, but it is where the two switches that matter live.</figcaption>
+        </figure>
+      </article>
+
+      <!-- =====================================================
+           STEP 6 — the critical one
+           ===================================================== -->
+      <article class="step" id="step-6">
+        <span class="step-num">6</span>
+        <h2>Turn on Developer Mode and install DAT on the glasses</h2>
+        <p>
+          This is the step that decides whether any of this works. Two actions, in this order.
+        </p>
+
+        <h3>6a — Enable Developer Mode</h3>
+        <p>
+          Switch <strong>Developer Mode</strong> on. Its description reads
+          <em>"If you are developing for Meta AI Glasses, Developer Mode allows you to use features
+          required for app development"</em>. Turning it on reveals a new row underneath: your
+          glasses, with their DAT status.
+        </p>
+
+        <h3>6b — Install the DAT app on the glasses</h3>
+        <p>
+          Under Developer Mode you will see your glasses by name — something like
+          <strong>RB Meta 0JKV</strong> — followed by <strong>DAT SDK version</strong>. If it says
+          <strong>Not installed</strong>, tap <strong>Install</strong>.
+        </p>
+
+        <figure class="shot">
+          <img src="shots/06-developer-mode-dat.jpg" alt="App info screen with Developer Mode enabled and the DAT install button" loading="lazy" />
+          <figcaption><b>Developer Mode on, DAT still missing.</b> "DAT SDK version: Not installed" is the exact state in which the glasses reject every connection attempt — silently, with no error you can see from CamVerse. Tap <b>Install</b>.</figcaption>
+        </figure>
+
+        <div class="callout callout--warn">
+          <span class="callout-label">Be patient here</span>
+          The install pushes a component onto the glasses over Bluetooth and it is
+          <strong>slow</strong> — expect several minutes, sometimes much longer. Keep the glasses
+          unfolded, near the phone, and leave the Meta AI app open on this screen. If it seems
+          stuck, put the glasses in their charging case for a minute and reopen the screen.
+        </div>
+
+        <figure class="shot">
+          <img src="shots/06b-dat-installed.jpg" alt="The DAT row showing an installed version number" loading="lazy" />
+          <figcaption><b>What success looks like:</b> "DAT SDK version" now shows an actual version number instead of "Not installed". Do not move on until you see this — every later step will fail if you do.</figcaption>
+        </figure>
+
+        <div class="callout callout--crit">
+          <span class="callout-label">No Developer Mode section?</span>
+          If the App info screen has no Developer Mode block at all, your Meta account is almost
+          certainly not on the tester list yet. Go back to <a href="#step-1">step 1</a> — this is
+          not something you can enable on your side.
+        </div>
+      </article>
+
+      <!-- =====================================================
+           STEP 7
+           ===================================================== -->
+      <article class="step" id="step-7">
+        <span class="step-num">7</span>
+        <h2>Open CamVerse and tap the glasses</h2>
+        <p>
+          Back in CamVerse. On the right-hand strip of source thumbnails, tap the
+          <strong>glasses card</strong>. Put the glasses on, or at least open them — a folded pair
+          will not start a stream.
+        </p>
+
+        <figure class="shot">
+          <img src="shots/07-camverse-glasses-card.jpg" alt="CamVerse main screen with the glasses source card" loading="lazy" />
+          <figcaption><b>Tap the glasses thumbnail</b> to start the connection. The dot on the card is the status light: red disconnected, orange connecting, green live.</figcaption>
+        </figure>
+
+        <div class="callout callout--note">
+          <span class="callout-label">First run takes a moment</span>
+          The first connection runs through registration, permissions and session setup in one go,
+          so give it 10–15 seconds before deciding something is wrong.
+        </div>
+      </article>
+
+      <!-- =====================================================
+           STEP 8
+           ===================================================== -->
+      <article class="step" id="step-8">
+        <span class="step-num">8</span>
+        <h2>Authorise CamVerse on your Meta account</h2>
+        <p>
+          Meta AI takes over the screen and asks
+          <strong>"Connect CamVerse to your Meta devices?"</strong>. There is a catch here that
+          stops most people: the <strong>Unverified app</strong> toggle.
+        </p>
+        <ul class="bullets">
+          <li><strong>Turn the toggle on.</strong> It is off by default, and <em>Connect</em> will not complete without it.</li>
+          <li>The warning is accurate: CamVerse is a third-party app that Meta has not reviewed. That is what a developer-preview app is.</li>
+          <li>Then tap <strong>Connect</strong>.</li>
+        </ul>
+
+        <figure class="shot">
+          <img src="shots/08-connect-camverse.jpg" alt="Meta AI asking to connect CamVerse to your Meta devices" loading="lazy" />
+          <figcaption><b>Enable "Unverified app", then Connect.</b> If this screen never appears and CamVerse just reports a failure, your account is not allow-listed yet — back to <a href="#step-1">step 1</a>.</figcaption>
+        </figure>
+      </article>
+
+      <!-- =====================================================
+           STEP 9
+           ===================================================== -->
+      <article class="step" id="step-9">
+        <span class="step-num">9</span>
+        <h2>Allow camera access</h2>
+        <p>
+          A second sheet asks
+          <strong>"Allow CamVerse to access the camera on your Meta devices?"</strong>.
+          Choose <strong>Always allow</strong>, then <strong>Confirm</strong>.
+        </p>
+        <p>
+          <em>Allow once</em> works too, but you will be asked again on every single launch.
+          <strong>Always allow</strong> is what makes CamVerse reconnect silently from then on.
+        </p>
+
+        <figure class="shot">
+          <img src="shots/09-camera-permission.jpg" alt="Camera permission sheet with Always allow selected" loading="lazy" />
+          <figcaption><b>Always allow &rsaquo; Confirm.</b> You can revoke it whenever you like from the Meta AI settings, under connected apps.</figcaption>
+        </figure>
+      </article>
+
+      <!-- =====================================================
+           STEP 10
+           ===================================================== -->
+      <article class="step" id="step-10">
+        <span class="step-num">10</span>
+        <h2>You are connected</h2>
+        <p>
+          CamVerse returns to the camera screen and the glasses feed fills the preview. The status
+          line reads <strong>Glasses: Connected ✓</strong> and the card dot turns green.
+        </p>
+
+        <figure class="shot">
+          <img src="shots/10-glasses-connected.jpg" alt="CamVerse showing the live POV feed from the glasses" loading="lazy" />
+          <figcaption><b>Live POV from the glasses.</b> From here the glasses behave like any other source: tap a thumbnail to switch to it mid-recording, hit the red button to record, or LIVE to stream.</figcaption>
+        </figure>
+
+        <div class="callout callout--ok">
+          <span class="callout-label">Next time is easier</span>
+          Steps 1 to 6 are one-off. On later launches CamVerse reconnects on its own — as long as
+          the glasses are unfolded, charged and in range.
+        </div>
+      </article>
+
+      <!-- =====================================================
+           TROUBLESHOOTING
+           ===================================================== -->
+      <article class="step" id="troubleshooting">
+        <span class="step-num">?</span>
+        <h2>When it does not work</h2>
+        <p>
+          Almost every failure comes from the glasses refusing the session, not from CamVerse. In
+          rough order of how often they actually happen:
+        </p>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr><th>What you see</th><th>What it really is</th><th>Fix</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Connects, then drops instantly</b></td>
+                <td>The glasses are <b>folded</b>. The hinge sensor gates the camera, so the request is refused before it reaches the lens.</td>
+                <td>Unfold them, or better, wear them. Then tap the card again.</td>
+              </tr>
+              <tr>
+                <td><b>Nothing happens at all</b></td>
+                <td>The <b>DAT app is missing on the glasses</b>. This is the number-one cause and it is invisible from CamVerse.</td>
+                <td><a href="#step-6">Step 6</a>. Confirm the DAT row shows a version, not "Not installed".</td>
+              </tr>
+              <tr>
+                <td><b>No authorisation screen ever appears</b></td>
+                <td>Your Meta account is <b>not on the tester list</b>, so registration is rejected before any UI is shown.</td>
+                <td><a href="#step-1">Step 1</a>. Send me the Meta account email and wait for confirmation.</td>
+              </tr>
+              <tr>
+                <td><b>"Connect" does nothing</b></td>
+                <td>The <b>Unverified app</b> toggle was left off.</td>
+                <td>Turn it on before tapping Connect. See <a href="#step-8">step 8</a>.</td>
+              </tr>
+              <tr>
+                <td><b>Refuses to start, glasses seem fine</b></td>
+                <td><b>Battery too low.</b> Meta blocks camera streaming below a safety threshold to avoid a brownout.</td>
+                <td>Charge above 30% and retry.</td>
+              </tr>
+              <tr>
+                <td><b>Connected, but the preview stays black</b></td>
+                <td>The session is up but no video frames arrive — usually a stuck stream on the glasses side.</td>
+                <td>Close CamVerse, power-cycle the glasses in their case, reopen.</td>
+              </tr>
+              <tr>
+                <td><b>Permission popup on every launch</b></td>
+                <td><em>Allow once</em> was chosen instead of <em>Always allow</em>.</td>
+                <td>Reconnect and pick <b>Always allow</b> this time.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--note">
+          <span class="callout-label">Still stuck?</span>
+          CamVerse can export a debug report: <strong>Tools &rsaquo; Export debug logs</strong>.
+          Email that file to
+          <a href="mailto:hanetroberto@gmail.com?subject=CamVerse%20glasses%20debug">hanetroberto@gmail.com</a>
+          along with your phone model and Android version, and I can usually tell you exactly which
+          of the steps above did not take.
+        </div>
+      </article>
+
+      <!-- =====================================================
+           CTA
+           ===================================================== -->
+      <div class="cta-band" id="access">
+        <h2>Not on the tester list yet?</h2>
+        <p>
+          Send me the Meta account your glasses are paired to and I will add it. Access is manual
+          only because Meta's toolkit is still in developer preview.
+        </p>
+        <div class="hero-cta">
+          <!-- Access request form -->
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdb17E0DVoMO4E3pOJb0JoAPdAHumBb5ReT_EbNHSe_b5tEgg/viewform" target="_blank" rel="noopener" class="btn btn-primary">Request glasses access</a>
+          <a href="index.html" class="btn btn-ghost">Back to CamVerse</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <span class="nav-logo">CamVerse</span>
+          <p>Multi-camera recording for people who would rather shoot than edit.</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Overview</a>
+          <a href="glasses.html">Setup guide</a>
+          <a href="https://play.google.com/store/apps/details?id=com.zenom.camverse" target="_blank" rel="noopener">Google Play</a>
+          <a href="https://hanetroberto-code.github.io/camverse-privacy/" target="_blank" rel="noopener">Privacy policy</a>
+          <a href="../">Roberto Hanet</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 Roberto Hanet · Ray-Ban and Meta are trademarks of their respective owners. CamVerse is an independent app, not affiliated with or endorsed by Meta.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Screenshots that are not in shots/ yet degrade to a dashed placeholder
+    // instead of a broken-image icon, so the page stays publishable mid-way.
+    (function () {
+      function placeholder(img) {
+        if (!img.parentNode) return;
+        var file = img.getAttribute('src').split('/').pop();
+        var box = document.createElement('div');
+        box.className = 'shot-missing';
+        box.innerHTML = 'Screenshot coming soon<code>' + file + '</code>';
+        img.replaceWith(box);
+      }
+      document.querySelectorAll('.shot img').forEach(function (img) {
+        img.addEventListener('error', function () { placeholder(img); });
+        // Catch images that already failed before this script ran
+        if (img.complete && img.naturalWidth === 0) placeholder(img);
+      });
+    })();
+  </script>
+
+</body>
+</html>

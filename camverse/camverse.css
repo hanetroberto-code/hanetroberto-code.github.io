@@ -1,0 +1,349 @@
+/* ==========================================================
+   CAMVERSE — page-specific styles
+   Extends ../style.css (same tokens, same fonts, same palette)
+   ========================================================== */
+
+:root {
+  --ok:    #34d399;
+  --warn:  #fbbf24;
+  --crit:  #f87171;
+}
+
+/* Guide pages start below the fixed nav */
+.page-top { padding-top: 7rem; padding-bottom: 2rem; }
+
+.page-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #fff 45%, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-lead {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 640px;
+}
+
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-bottom: 1.25rem;
+}
+.breadcrumb a { color: var(--text-muted); }
+.breadcrumb a:hover { color: var(--accent); }
+
+/* ---------- Reading time / meta strip ---------- */
+.meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+.meta-strip span {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Table of contents ---------- */
+.toc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+.toc h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+.toc ol {
+  list-style: none;
+  counter-reset: toc;
+  display: grid;
+  gap: 0.6rem;
+}
+.toc li { counter-increment: toc; }
+.toc a {
+  display: flex;
+  gap: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  transition: color var(--transition);
+}
+.toc a::before {
+  content: counter(toc, decimal-leading-zero);
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.toc a:hover { color: var(--text); }
+
+/* ---------- Steps ---------- */
+.step {
+  border-top: 1px solid var(--border);
+  padding-top: 2.5rem;
+  margin-top: 3.5rem;
+  scroll-margin-top: 6rem;
+}
+.step:first-of-type { border-top: none; margin-top: 0; }
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 0 18px var(--accent-glow);
+  margin-bottom: 0.9rem;
+}
+
+.step h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+}
+
+.step p { color: var(--text-muted); margin-bottom: 1rem; }
+.step p strong { color: var(--text); font-weight: 600; }
+.step h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.6rem;
+}
+
+.step ul.bullets {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+  margin: 0 0 1.25rem;
+}
+.step ul.bullets li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--text-muted);
+  font-size: 0.94rem;
+}
+.step ul.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0.25rem;
+  top: 0.62em;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.step ul.bullets li strong { color: var(--text); font-weight: 600; }
+
+/* ---------- Screenshot figures ---------- */
+.shot { margin: 1.5rem 0 1.75rem; }
+
+.shot img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+}
+.shot.wide img { max-width: 640px; }
+
+.shot figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.84rem;
+  color: var(--text-dim);
+  max-width: 560px;
+  line-height: 1.55;
+}
+.shot figcaption b {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Placeholder shown when a screenshot file is not there yet */
+.shot-missing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 9 / 19.5;
+  border: 1px dashed var(--text-dim);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  padding: 1.5rem;
+  line-height: 1.6;
+}
+.shot.wide .shot-missing { max-width: 640px; aspect-ratio: 16 / 9; }
+.shot-missing code {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--accent);
+  font-size: 0.75rem;
+  word-break: break-all;
+}
+
+/* ---------- Callouts ---------- */
+.callout {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  background: var(--surface);
+  padding: 1.1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+.callout strong { color: var(--text); font-weight: 600; }
+.callout--note { border-left-color: var(--accent-2); }
+.callout--warn { border-left-color: var(--warn); }
+.callout--crit { border-left-color: var(--crit); }
+.callout--ok   { border-left-color: var(--ok); }
+
+.callout-label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.callout--note .callout-label { color: var(--accent-2); }
+.callout--warn .callout-label { color: var(--warn); }
+.callout--crit .callout-label { color: var(--crit); }
+.callout--ok   .callout-label { color: var(--ok); }
+
+/* ---------- Requirements checklist ---------- */
+.checklist {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+.checklist li {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+.checklist li b { color: var(--text); font-weight: 600; }
+.checklist .tick {
+  color: var(--accent);
+  flex-shrink: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ---------- Troubleshooting table ---------- */
+.tbl-wrap { overflow-x: auto; margin: 1.5rem 0; }
+table.tbl {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.89rem;
+}
+table.tbl th, table.tbl td {
+  text-align: left;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+table.tbl th {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+table.tbl td { color: var(--text-muted); }
+table.tbl td b { color: var(--text); font-weight: 600; }
+table.tbl tr:last-child td { border-bottom: none; }
+
+/* ---------- CTA band ---------- */
+.cta-band {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  margin-top: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.cta-band h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.cta-band p {
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto 1.75rem;
+  font-size: 0.95rem;
+}
+.cta-band .hero-cta { justify-content: center; }
+
+/* ---------- Feature grid on the landing page ---------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ---------- Small helpers ---------- */
+.kbd {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.12rem 0.42rem;
+  font-size: 0.85em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--text);
+}
+.muted { color: var(--text-muted); }
+.center { text-align: center; }
+
+/* Keep the nav usable on phones (the portfolio hides it) */
+@media (max-width: 640px) {
+  .nav-links {
+    display: flex;
+    gap: 1.1rem;
+  }
+  .nav-links a { font-size: 0.8rem; }
+  .nav { padding: 0.8rem 1rem; }
+  .page-top { padding-top: 6rem; }
+  .shot img, .shot-missing { max-width: 100%; }
+}
