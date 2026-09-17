@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Psychedelic World — a 3D trip you can play with friends</title>
+<meta name="description" content="Psychedelic World is a 3D psychedelic open-world playground: one neon hub, seven reinvented arcade minigames, four surreal zones, fifteen playable characters and online co-op. Free on Windows and Android, 25 September 2026. Built in Godot 4.">
+<link rel="icon" href="assets/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hanetroberto-code.github.io/psychedelicworld/">
+<meta property="og:title" content="Psychedelic World - out 25 September 2026">
+<meta property="og:description" content="One neon hub. Seven reinvented arcade games. Four surreal worlds. Bring friends. Free on Windows and Android.">
+<!-- Absolute, not relative: every social scraper fetches this from its own
+     server, where a relative path resolves to nothing. -->
+<meta property="og:image" content="https://hanetroberto-code.github.io/psychedelicworld/assets/PsyIsland.png">
+<meta property="og:image:alt" content="A psychedelic island of giant glowing mushrooms">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Psychedelic World - out 25 September 2026">
+<meta name="twitter:description" content="One neon hub. Seven reinvented arcade games. Four surreal worlds. Free on Windows and Android.">
+<meta name="twitter:image" content="https://hanetroberto-code.github.io/psychedelicworld/assets/PsyIsland.png">
+<link rel="canonical" href="https://hanetroberto-code.github.io/psychedelicworld/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --void:#06030d; --ink:#0e0720; --card:#150c2b;
+  --magenta:#ff2d95; --cyan:#22e0ff; --lime:#b4ff3d; --violet:#9d5cff; --amber:#ffb020;
+  --text:#f2ecff; --muted:#a795c9; --line:rgba(157,92,255,.28);
+  --maxw:1140px;
+}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--void); color:var(--text);
+  font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,sans-serif;
+  font-size:17px; line-height:1.65; overflow-x:hidden;
+}
+h1,h2,h3{font-family:'Syne','Space Grotesk',sans-serif;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:0}
+a{color:inherit}
+img{max-width:100%;display:block}
+code{font-size:.86em;background:rgba(157,92,255,.18);padding:2px 7px;border-radius:6px;color:var(--cyan)}
+.wrap{width:min(var(--maxw),92vw);margin-inline:auto}
+.eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin:0 0 14px}
+.lede{color:var(--muted);font-size:1.06rem;max-width:62ch}
+section{padding:96px 0;position:relative}
+
+/* ---------- animated psychedelic background ---------- */
+.bg{position:fixed;inset:0;z-index:-2;overflow:hidden;
+  background:radial-gradient(120% 80% at 50% -10%, #1b0b3a 0%, var(--void) 62%)}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;mix-blend-mode:screen;animation:drift 26s ease-in-out infinite}
+.b1{width:52vw;height:52vw;left:-12vw;top:-10vw;background:var(--magenta)}
+.b2{width:44vw;height:44vw;right:-10vw;top:6vw;background:var(--cyan);animation-duration:34s;animation-delay:-8s}
+.b3{width:60vw;height:60vw;left:18vw;top:52vh;background:var(--violet);animation-duration:40s;animation-delay:-16s}
+@keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}33%{transform:translate3d(6vw,-4vh,0) scale(1.14)}66%{transform:translate3d(-5vw,5vh,0) scale(.92)}}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>")}
+@media (prefers-reduced-motion:reduce){.blob{animation:none}}
+
+/* ---------- nav ---------- */
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+  background:rgba(6,3,13,.62);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;gap:28px;padding:14px 0}
+.brand{display:flex;align-items:center;gap:11px;font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;text-decoration:none;letter-spacing:-.01em}
+.brand img{width:30px;height:30px;border-radius:8px}
+nav .links{margin-left:auto;display:flex;gap:26px;font-size:.92rem;font-weight:500}
+nav .links a{text-decoration:none;color:var(--muted);transition:color .2s}
+nav .links a:hover{color:var(--text)}
+@media(max-width:820px){nav .links{display:none}}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:999px;
+  font-weight:700;text-decoration:none;font-size:.95rem;border:1px solid transparent;transition:transform .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(100deg,var(--magenta),var(--violet) 55%,var(--cyan));color:#0a0416;
+  box-shadow:0 10px 34px rgba(255,45,149,.34)}
+.btn-primary:hover{box-shadow:0 14px 44px rgba(34,224,255,.4)}
+.btn-ghost{border-color:var(--line);color:var(--text);background:rgba(157,92,255,.08)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* ---------- hero ---------- */
+.hero{padding:110px 0 84px;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(157,92,255,.1);font-size:.8rem;letter-spacing:.1em;
+  text-transform:uppercase;font-weight:700;color:var(--cyan);margin-bottom:26px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime)}
+.hero h1{font-size:clamp(2.9rem,9.2vw,6.4rem);text-transform:uppercase}
+.hero h1 .g{background:linear-gradient(96deg,var(--magenta),var(--amber) 30%,var(--lime) 55%,var(--cyan) 78%,var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% 100%;animation:hue 12s linear infinite}
+@keyframes hue{0%{background-position:0% 50%}100%{background-position:220% 50%}}
+.hero p{margin:26px auto 36px;font-size:1.16rem;color:var(--muted);max-width:60ch}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.note{margin-top:20px;font-size:.85rem;color:var(--muted);opacity:.75}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:72px}
+.stat{background:var(--ink);padding:26px 18px;text-align:center}
+.stat b{display:block;font-family:'Syne',sans-serif;font-size:2.2rem;line-height:1;
+  background:linear-gradient(120deg,var(--cyan),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- section head ---------- */
+.head{max-width:70ch;margin-bottom:52px}
+.head h2{font-size:clamp(2rem,4.6vw,3.1rem)}
+.head p{margin-top:16px;color:var(--muted)}
+
+/* ---------- cards ---------- */
+.grid{display:grid;gap:20px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.g3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.g3,.g2{grid-template-columns:1fr}}
+.card{background:linear-gradient(165deg,var(--card),rgba(14,7,32,.7));border:1px solid var(--line);
+  border-radius:20px;padding:28px;position:relative;overflow:hidden;transition:transform .22s,border-color .22s}
+.card::after{content:"";position:absolute;inset:0;border-radius:20px;opacity:0;transition:opacity .22s;pointer-events:none;
+  background:radial-gradient(90% 70% at 10% 0%,rgba(255,45,149,.16),transparent 60%)}
+.card:hover{transform:translateY(-4px);border-color:rgba(34,224,255,.5)}
+.card:hover::after{opacity:1}
+.card h3{font-size:1.22rem;margin-bottom:10px}
+.card p{margin:0;color:var(--muted);font-size:.95rem}
+.icon{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:1.4rem;margin-bottom:18px;
+  background:rgba(157,92,255,.16);border:1px solid var(--line)}
+.tag{display:inline-block;margin-top:16px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--lime);font-weight:700}
+
+/* ---------- split feature ---------- */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr;gap:36px}}
+ul.checks{list-style:none;padding:0;margin:26px 0 0}
+ul.checks li{padding-left:30px;position:relative;margin-bottom:13px;color:var(--muted)}
+ul.checks li::before{content:"◆";position:absolute;left:0;top:0;color:var(--cyan)}
+.frame{border:1px solid var(--line);border-radius:24px;background:var(--ink);padding:22px;position:relative;overflow:hidden}
+.frame::before{content:"";position:absolute;inset:-40%;
+  background:conic-gradient(from 0deg,var(--magenta),var(--cyan),var(--lime),var(--violet),var(--magenta));
+  opacity:.16;animation:spin 22s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.frame .inner{position:relative;background:rgba(6,3,13,.86);border-radius:16px;padding:26px;min-height:240px;
+  display:flex;flex-direction:column;justify-content:center;gap:4px}
+.kv{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:.92rem}
+.kv:last-child{border-bottom:0}
+.kv span:first-child{color:var(--muted)}
+.kv span:last-child{font-weight:700;color:var(--cyan)}
+
+/* ---------- foto dentro le card ----------
+   Gli scatti non stanno piu' in una galleria a parte: ognuno sta accanto alla
+   sua descrizione, dove serve a capire di cosa si sta parlando.
+   I rapporti vanno da 1.18 a 2.42, quindi `contain` li mostra INTERI — su una
+   pagina cosi' scura la cornice vuota non si distingue dallo sfondo, mentre
+   `cover` avrebbe mangiato un terzo dell'altezza di PsyCrush. */
+.card .shot{margin:-28px -28px 18px;border-bottom:1px solid var(--line);background:var(--void)}
+.card .shot img{width:100%;aspect-ratio:16/10;object-fit:contain;display:block}
+.card .shot figcaption{padding:10px 14px;color:var(--muted);font-size:.8rem;
+  border-top:1px solid var(--line);background:var(--card)}
+
+/* ---------- theme song ---------- */
+.tune{position:fixed;right:18px;bottom:18px;z-index:50;display:flex;align-items:center;gap:10px;
+  padding:10px 16px;border-radius:999px;cursor:pointer;font:inherit;font-size:.85rem;
+  color:var(--text);background:rgba(21,12,43,.92);border:1px solid var(--line);
+  backdrop-filter:blur(8px);transition:border-color .2s,transform .2s}
+.tune:hover{border-color:var(--magenta);transform:translateY(-2px)}
+.tune:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+/* Le barrette si muovono solo mentre suona: fermo, il tasto dice "sono spento"
+   senza bisogno di leggere. */
+.tune .bars{display:flex;align-items:flex-end;gap:2px;height:14px}
+.tune .bars i{width:3px;height:4px;border-radius:2px;background:var(--muted);display:block}
+.tune[data-on="1"] .bars i{background:var(--cyan);animation:bob .9s ease-in-out infinite}
+.tune[data-on="1"] .bars i:nth-child(2){animation-delay:.15s}
+.tune[data-on="1"] .bars i:nth-child(3){animation-delay:.3s}
+.tune[data-on="1"] .bars i:nth-child(4){animation-delay:.45s}
+@keyframes bob{0%,100%{height:4px}50%{height:14px}}
+@media(prefers-reduced-motion:reduce){.tune[data-on="1"] .bars i{animation:none;height:10px}}
+@media(max-width:560px){.tune{right:12px;bottom:12px;padding:9px 13px;font-size:.8rem}}
+
+/* ---------- ingrandimento ----------
+   Nelle card le foto stanno dentro un riquadro 16/10 e i dettagli si perdono:
+   toccandone una si apre a schermo intero, alla sua dimensione vera. */
+.card .shot{cursor:zoom-in}
+.lens{position:fixed;inset:0;z-index:100;display:none;place-items:center;
+  background:rgba(6,3,13,.94);backdrop-filter:blur(6px);padding:24px}
+.lens[data-open="1"]{display:grid}
+.lens img{max-width:min(96vw,1600px);max-height:82vh;border-radius:12px;
+  border:1px solid var(--line);display:block}
+.lens figcaption{margin-top:14px;color:var(--muted);font-size:.9rem;text-align:center;
+  max-width:70ch}
+.lens figure{margin:0;display:grid;justify-items:center}
+.lens button{position:absolute;background:rgba(21,12,43,.92);color:var(--text);
+  border:1px solid var(--line);border-radius:999px;cursor:pointer;font:inherit;
+  width:52px;height:52px;font-size:1.3rem;line-height:1;transition:border-color .2s}
+.lens button:hover{border-color:var(--magenta)}
+.lens button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.lens .x{top:20px;right:20px}
+.lens .prev{left:20px;top:50%;transform:translateY(-50%)}
+.lens .next{right:20px;top:50%;transform:translateY(-50%)}
+.lens .count{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+  color:var(--muted);font-size:.8rem;letter-spacing:.08em}
+@media(max-width:560px){
+  .lens{padding:12px}
+  .lens button{width:44px;height:44px}
+  .lens .prev{left:8px} .lens .next{right:8px} .lens .x{top:12px;right:12px}
+}
+
+/* ---------- final cta ---------- */
+.final{text-align:center;border:1px solid var(--line);border-radius:28px;padding:64px 32px;
+  background:radial-gradient(80% 120% at 50% 0%,rgba(157,92,255,.2),rgba(14,7,32,.6))}
+.final h2{font-size:clamp(1.9rem,4.4vw,3rem)}
+.final p{color:var(--muted);margin:18px auto 30px;max-width:52ch}
+
+/* ---------- sign-up ---------- */
+.signup{max-width:540px;margin:0 auto;position:relative}
+.signup-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.signup input[type=email]{flex:1 1 250px;min-width:0;padding:14px 22px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(6,3,13,.72);color:var(--text);
+  font:inherit;font-size:1rem;transition:border-color .2s,box-shadow .2s}
+.signup input[type=email]::placeholder{color:var(--muted);opacity:.55}
+.signup input[type=email]:focus{outline:none;border-color:var(--cyan);
+  box-shadow:0 0 0 3px rgba(34,224,255,.16)}
+.signup button[disabled]{opacity:.5;cursor:default;transform:none}
+.trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.signup-msg{min-height:1.6em;margin:18px 0 0;font-size:.93rem;color:var(--muted)}
+.signup-msg[data-state=ok]{color:var(--lime)}
+.signup-msg[data-state=err]{color:var(--magenta)}
+.platforms{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.platforms span{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:8px 17px}
+
+footer{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--muted);font-size:.87rem}
+footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+footer a{color:var(--cyan);text-decoration:none}
+.disclaimer{margin-top:22px;font-size:.79rem;opacity:.7;max-width:74ch;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="grain"></div>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top"><img src="assets/icon.png" alt=""> Psychedelic World</a>
+      <div class="links">
+        <a href="#games">Games</a>
+        <a href="#worlds">Worlds</a>
+        <a href="#online">Online</a>
+        <a href="#store">Marketplace</a>
+        <a href="#play">Play</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap">
+    <div class="badge"><span class="dot"></span> Out 25 September 2026 · Windows &amp; Android</div>
+    <h1>Enter the <span class="g">Psychedelic World</span></h1>
+    <p>One neon hub. Seven reinvented arcade games hidden behind living portals. Four surreal worlds to get lost in. Bring friends — the whole trip is playable online.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#play">Get the launch link →</a>
+      <a class="btn btn-ghost" href="#games">See the games</a>
+    </div>
+    <p class="note">Free on Windows and Android. Leave your email and the download link arrives on launch day.</p>
+
+    <div class="stats">
+      <div class="stat"><b>7</b><span>Minigames</span></div>
+      <div class="stat"><b>4</b><span>Worlds</span></div>
+      <div class="stat"><b>15</b><span>Characters</span></div>
+      <div class="stat"><b>P2P</b><span>Online co-op</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="hub">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">The Hub</p>
+      <h2>A world that breathes, and doors that pull you in</h2>
+      <p class="lede">You start in the Hub: a floating psychedelic island where the ground ripples with plasma and every portal is a different game. No menus to fight — you walk up to a portal and you are in.</p>
+      <ul class="checks">
+        <li>Third-person movement, jump, sprint and a color-drain blaster</li>
+        <li>Perception powers that bend the screen: monochrome trips, unsteady walks, shifting vision</li>
+        <li>Pick-ups that reward exploring instead of grinding</li>
+        <li>Invisible bounds that catch you if the void ever swallows you</li>
+      </ul>
+    </div>
+    <div class="frame"><div class="inner">
+      <div class="kv"><span>Engine</span><span>Godot 4.4</span></div>
+      <div class="kv"><span>Perspective</span><span>Third person 3D</span></div>
+      <div class="kv"><span>Session</span><span>Solo or online</span></div>
+      <div class="kv"><span>Networking</span><span>WebRTC peer-to-peer</span></div>
+      <div class="kv"><span>Platform</span><span>Windows &amp; Android</span></div>
+    </div></div>
+  </div>
+</section>
+
+<section id="games">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Minigames</p>
+      <h2>Arcade classics, put through the kaleidoscope</h2>
+      <p>Every portal in the Hub leads somewhere else. Each game is rebuilt in 3D with its own rules, its own soundtrack and its own way of being ruined by a friend.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card"><figure class="shot"><img src="assets/PsyCrush.webp" alt="PsyCrush" loading="lazy"><figcaption>Pillars, and the pressure of the next move</figcaption></figure>
+        <div class="icon">💠</div><h3>PsyCrush</h3>
+        <p>Match-3 that grows with your party: the board widens by six columns for every extra player. Match the same color as a friend within a heartbeat and the Resonance bonus doubles both scores.</p>
+        <span class="tag">Co-op · Competitive</span>
+      </div>
+      <div class="card"><figure class="shot"><img src="assets/PsyLines.webp" alt="PsyLine" loading="lazy"><figcaption>Walk the column, stack the piece, clear the line</figcaption></figure>
+        <div class="icon">🧱</div><h3>PsyLine</h3>
+        <p>Falling blocks on a 10×20 well, played over a floor of living psy-lines. Clean, fast, and mean once the speed climbs.</p>
+        <span class="tag">Arena · Score race</span>
+      </div>
+      <div class="card"><figure class="shot"><img src="assets/PsyPop.webp" alt="PsyPop" loading="lazy"><figcaption>Bank it off the wall before the ceiling comes down</figcaption></figure>
+        <div class="icon">🫧</div><h3>PsyPop</h3>
+        <p>Shoot bubbles up an 8×8 grid, bank them off the side walls, watch the ceiling creep down. One wasted shot is one row closer to the end.</p>
+        <span class="tag">Arena · Score race</span>
+      </div>
+      <div class="card"><figure class="shot"><img src="assets/PsyRun.webp" alt="PsyRun" loading="lazy"><figcaption>Three lanes and one jump</figcaption></figure>
+        <div class="icon">🏃</div><h3>PsyRun</h3>
+        <p>An endless three-lane runner through collapsing neon geometry. Real holes, real falls, no forgiving floor underneath.</p>
+        <span class="tag">Endless</span>
+      </div>
+      <div class="card"><figure class="shot"><img src="assets/PsyChomp.webp" alt="PsyChomp" loading="lazy"><figcaption>The chase through the maze</figcaption></figure>
+        <div class="icon">👾</div><h3>PsyChomp</h3>
+        <p>You are the prey. A giant punk-rock chomper hunts you through a procedural maze on the beat while you collect dots to open the escape portal. Bliss Pills stun it. Shrooms make you faster.</p>
+        <span class="tag">Survival</span>
+      </div>
+      <div class="card"><figure class="shot"><img src="assets/PsyTenis.webp" alt="PsyTenis" loading="lazy"><figcaption>A rally in the round</figcaption></figure>
+        <div class="icon">🎾</div><h3>PsyTenis</h3>
+        <p>Head-to-head rallies in an arena that reacts to every hit. Easy to start, brutal once the ball speeds up.</p>
+        <span class="tag">Versus</span>
+      </div>
+      <div class="card"><figure class="shot"><img src="assets/PsyDanceFloor.webp" alt="PsyDanceFloor" loading="lazy"><figcaption>Hit the beat, hold the floor</figcaption></figure>
+        <div class="icon">🕺</div><h3>PsyDanceFloor</h3>
+        <p>The floor is the game. Tiles light, pulse and drop out with the music — last one still standing takes the set.</p>
+        <span class="tag">Party</span>
+      </div>
+      <div class="card">
+        <div class="icon">🌀</div><h3>More coming</h3>
+        <p>New portals keep appearing in the Hub. Watch the repository to see what shows up next.</p>
+        <span class="tag">Roadmap</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="worlds">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Worlds</p>
+      <h2>Four places worth wandering off into</h2>
+      <p>Not levels with an exit at the end — open zones you can drop into with friends and just mess around in.</p>
+    </div>
+    <div class="grid g2">
+      <div class="card"><figure class="shot"><img src="assets/PsyWar.webp" alt="Warzone Island" loading="lazy"><figcaption>Cover, sightlines, and nowhere safe for long</figcaption></figure><h3>Warzone Island</h3><p>A jagged PvP island built for color combat: cover, sightlines and six spawn rings around the center. Home of the free-for-all mode.</p></div>
+      <div class="card"><figure class="shot"><img src="assets/NeonCity.webp" alt="Neon City" loading="lazy"><figcaption>Rooftops after dark</figcaption></figure><h3>Neon City</h3><p>A vertical city drowning in signage and reflections. Rooftops, alleys and a skyline that never stops shifting hue.</p></div>
+      <div class="card"><figure class="shot"><img src="assets/Neon.webp" alt="Neon City II" loading="lazy"><figcaption>Wider streets, bigger drops</figcaption></figure><h3>Neon City II</h3><p>The second district — wider streets, bigger drops, more room to run and shoot.</p></div>
+      <div class="card"><figure class="shot"><img src="assets/PsyIsland.webp" alt="Psy Island" loading="lazy"><figcaption>Giant mushrooms, and a plot of land with your name on it</figcaption></figure><h3>Psy Island</h3><p>The calm one. Impossible flora, warm horizons, and the best place to find out what your perception powers really do to a landscape.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="online">
+  <div class="wrap split">
+    <div class="frame"><div class="inner">
+      <div class="kv"><span>Transport</span><span>WebRTC P2P</span></div>
+      <div class="kv"><span>Signalling</span><span>Hosted backend</span></div>
+      <div class="kv"><span>Joining</span><span>Share a room code</span></div>
+      <div class="kv"><span>Authority</span><span>Server-authoritative</span></div>
+      <div class="kv"><span>Port forwarding</span><span>Not required</span></div>
+    </div></div>
+    <div>
+      <p class="eyebrow">Online</p>
+      <h2>Host a room, send a code, play</h2>
+      <p class="lede">No lobby browser, no account to create. The host walks into the Hub and gets a room code on screen; anyone who types it in drops into the same world, the same portals, the same games.</p>
+      <ul class="checks">
+        <li>Peer-to-peer connection — no dedicated server to rent or wait for</li>
+        <li>Everyone shares one persistent world session across every zone</li>
+        <li>Live cross-player scoreboards inside the puzzle arenas</li>
+        <li>Solo play is exactly the same game, just quieter</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="store">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Marketplace</p>
+      <h2>Earn PsyCoins. Own the drop.</h2>
+      <p>Everything in the store is bought with coins you earn by playing. Music releases are minted in limited runs — each purchase writes a signed certificate carrying the copy number, the owner, the timestamp and the hash of the certificate before it.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card"><div class="icon">🪙</div><h3>PsyCoins</h3><p>Earned from pick-ups and level-ups. No purchase path, no shortcut — the only way in is playing.</p></div>
+      <div class="card"><div class="icon">💿</div><h3>Limited music</h3><p>Five exclusive tracks across Common, Rare, Epic and Legendary tiers, from 5000 copies down to 100.</p></div>
+      <div class="card"><div class="icon">📜</div><h3>Certificates</h3><p>A SHA-256 chain records every copy sold, so an edition can be verified and never quietly reprinted.</p></div>
+      <div class="card"><figure class="shot"><img src="assets/Menu.webp" alt="15 characters" loading="lazy"><figcaption>Fifteen travellers, each with their own speed, jump and luck</figcaption></figure><div class="icon">🧑‍🎤</div><h3>15 characters</h3><p>Each with its own model, animation set and stats. Unlock them with levels or coins and switch any time.</p></div>
+      <div class="card"><div class="icon">🎚️</div><h3>Full settings</h3><p>Four audio buses, a built-in music player and ten rebindable actions, reachable from the menu and mid-game.</p></div>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="play">
+  <div class="wrap">
+    <div class="final">
+      <p class="eyebrow">Friday 25 September 2026</p>
+      <h2>The portals open on the 25th</h2>
+      <p>Windows and Android, both on the same day, both free. Leave your email and the download link lands in your inbox the moment it goes live — that mail, and nothing else.</p>
+
+      <form class="signup" id="signup" novalidate>
+        <div class="signup-row">
+          <input id="email" type="email" name="email" required autocomplete="email"
+                 placeholder="you@example.com" aria-label="Your email address">
+          <button class="btn btn-primary" type="submit" id="signup-btn">Send me the link →</button>
+        </div>
+        <!-- Bots fill in every field they can find. This one is off-screen, so
+             anything arriving with it filled is not a person. -->
+        <input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="signup-msg" id="signup-msg" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="platforms"><span>Windows</span><span>Android</span><span>Free</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <div><strong>Psychedelic World</strong> — built with Godot 4</div>
+      <div><a href="../">More by Hanet Roberto</a> · <a href="#play">Get the launch link</a></div>
+    </div>
+    <p class="disclaimer">PsyCrush, PsyLine, PsyPop, PsyRun, PsyChomp, PsyTenis and PsyDanceFloor are original games inspired by arcade genres. They are not affiliated with, endorsed by, or connected to any existing game or trademark holder.</p>
+  </div>
+</footer>
+<!-- ─────────────────────────────────────────────────────────────────────
+     INGRANDIMENTO
+     Le foto nelle card sono contenute in un riquadro fisso: qui si vedono
+     alla loro dimensione vera. Frecce e swipe per scorrerle tutte senza
+     tornare indietro ogni volta.
+────────────────────────────────────────────────────────────────────── -->
+<div class="lens" id="lens" data-open="0" role="dialog" aria-modal="true" aria-label="Screenshot">
+  <button class="x" id="lensX" aria-label="Close">✕</button>
+  <button class="prev" id="lensPrev" aria-label="Previous">‹</button>
+  <button class="next" id="lensNext" aria-label="Next">›</button>
+  <figure><img id="lensImg" src="" alt=""><figcaption id="lensCap"></figcaption></figure>
+  <span class="count" id="lensCount"></span>
+</div>
+
+<script>
+(function () {
+  var lens  = document.getElementById('lens');
+  var img   = document.getElementById('lensImg');
+  var cap   = document.getElementById('lensCap');
+  var count = document.getElementById('lensCount');
+  if (!lens) return;
+
+  var scatti = Array.prototype.slice.call(document.querySelectorAll('.card .shot'));
+  if (!scatti.length) return;
+  var i = 0;
+  var tornaA = null;   // dove rimettere il fuoco alla chiusura
+
+  function mostra(n) {
+    i = (n + scatti.length) % scatti.length;
+    var f = scatti[i];
+    var src = f.querySelector('img');
+    var testo = f.querySelector('figcaption');
+    img.src = src.getAttribute('src');
+    img.alt = src.getAttribute('alt') || '';
+    cap.textContent = testo ? testo.textContent : '';
+    count.textContent = (i + 1) + ' / ' + scatti.length;
+  }
+
+  function apri(n) {
+    tornaA = document.activeElement;
+    mostra(n);
+    lens.dataset.open = '1';
+    // niente scorrimento sotto: su telefono e' la cosa piu' fastidiosa
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lensX').focus();
+  }
+
+  function chiudi() {
+    lens.dataset.open = '0';
+    document.body.style.overflow = '';
+    img.src = '';
+    if (tornaA && tornaA.focus) tornaA.focus();
+  }
+
+  scatti.forEach(function (f, n) {
+    f.addEventListener('click', function () { apri(n); });
+    // raggiungibile anche da tastiera, non solo col dito
+    f.setAttribute('tabindex', '0');
+    f.setAttribute('role', 'button');
+    f.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); apri(n); }
+    });
+  });
+
+  document.getElementById('lensX').addEventListener('click', chiudi);
+  document.getElementById('lensPrev').addEventListener('click', function (e) {
+    e.stopPropagation(); mostra(i - 1);
+  });
+  document.getElementById('lensNext').addEventListener('click', function (e) {
+    e.stopPropagation(); mostra(i + 1);
+  });
+  // un clic sul fondo chiude; sull'immagine no, o si chiuderebbe mentre la guardi
+  lens.addEventListener('click', function (e) { if (e.target === lens) chiudi(); });
+
+  document.addEventListener('keydown', function (e) {
+    if (lens.dataset.open !== '1') return;
+    if (e.key === 'Escape') chiudi();
+    else if (e.key === 'ArrowLeft') mostra(i - 1);
+    else if (e.key === 'ArrowRight') mostra(i + 1);
+  });
+
+  // swipe sul telefono
+  var x0 = null;
+  lens.addEventListener('touchstart', function (e) {
+    x0 = e.changedTouches[0].clientX;
+  }, { passive: true });
+  lens.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    x0 = null;
+    if (Math.abs(dx) > 45) mostra(dx < 0 ? i + 1 : i - 1);
+  }, { passive: true });
+})();
+</script>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     THEME SONG
+     I browser NON fanno partire audio senza che l'utente abbia toccato la
+     pagina: e' una regola, non una preferenza, e una pagina che parte a
+     cantare da sola verrebbe zittita d'ufficio. Quindi si prova subito, e se
+     viene bloccata si parte al PRIMO gesto qualunque esso sia — uno scroll,
+     un clic, un tasto. In pratica la musica c'e' da quando il visitatore fa
+     qualcosa, senza che debba cercare un pulsante.
+     Chi la spegne resta spento anche alla visita dopo.
+────────────────────────────────────────────────────────────────────── -->
+<!-- preload=none on purpose: the tune is 4.5 MB and nobody should pay for it
+     on mobile data unless they actually press the button. -->
+<audio id="theme" src="assets/theme.mp3" loop preload="none"></audio>
+<button class="tune" id="tuneBtn" data-on="0" aria-pressed="false" aria-label="Theme song">
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span id="tuneLabel">Theme song</span>
+</button>
+
+<script>
+(function () {
+  var audio = document.getElementById('theme');
+  var btn   = document.getElementById('tuneBtn');
+  var label = document.getElementById('tuneLabel');
+  if (!audio || !btn) return;
+
+  var KEY = 'psyworld-theme-off';
+  var spentoDallUtente = false;
+  try { spentoDallUtente = localStorage.getItem(KEY) === '1'; } catch (e) {}
+
+  audio.volume = 0.45;   // sottofondo, non concerto
+
+  function dipingi() {
+    var on = !audio.paused;
+    btn.dataset.on = on ? '1' : '0';
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    label.textContent = on ? 'Theme song' : 'Play theme';
+  }
+
+  function avvia() {
+    if (spentoDallUtente) return Promise.resolve();
+    var p = audio.play();
+    return (p && p.catch) ? p.catch(function () {}) : Promise.resolve();
+  }
+
+  // 1) tentativo immediato: su alcuni browser passa (se l'utente e' gia' stato
+  //    sul sito), e se non passa non costa nulla
+  avvia().then(dipingi);
+
+  // 2) rete vera: il primo gesto qualunque fa partire la musica, una volta sola.
+  //    La funzione va definita UNA volta fuori dal ciclo: dentro, ogni giro ne
+  //    creerebbe una diversa e removeEventListener ne toglierebbe solo una,
+  //    lasciando vive le altre tre.
+  var GESTI = ['pointerdown', 'keydown', 'touchstart', 'wheel'];
+  function alPrimoGesto() {
+    GESTI.forEach(function (ev) { document.removeEventListener(ev, alPrimoGesto); });
+    avvia().then(dipingi);
+  }
+  GESTI.forEach(function (ev) {
+    document.addEventListener(ev, alPrimoGesto, { passive: true });
+  });
+
+  // 3) il tasto: acceso/spento, e la scelta si ricorda
+  btn.addEventListener('click', function () {
+    if (audio.paused) {
+      spentoDallUtente = false;
+      try { localStorage.removeItem(KEY); } catch (e) {}
+      audio.play().catch(function () {});
+    } else {
+      spentoDallUtente = true;
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      audio.pause();
+    }
+    setTimeout(dipingi, 0);
+  });
+
+  audio.addEventListener('play', dipingi);
+  audio.addEventListener('pause', dipingi);
+
+  // 4) IL VIDEO HA LA PRECEDENZA.
+  //    Due audio sovrapposti non si ascoltano: mentre gira un filmato la
+  //    theme song tace e riprende quando finisce. Funziona per ogni <video>
+  //    della pagina, anche aggiunto dopo, e per un iframe YouTube basta
+  //    chiamare window.psyTheme.pause() / resume() quando cambia stato.
+  var messaInPausaDalVideo = false;
+  function collega(v) {
+    v.addEventListener('play', function () {
+      if (!audio.paused) { messaInPausaDalVideo = true; audio.pause(); }
+    });
+    ['pause', 'ended'].forEach(function (ev) {
+      v.addEventListener(ev, function () {
+        if (messaInPausaDalVideo && !spentoDallUtente) {
+          messaInPausaDalVideo = false;
+          audio.play().catch(function () {});
+        }
+      });
+    });
+  }
+  document.querySelectorAll('video').forEach(collega);
+  new MutationObserver(function (muts) {
+    muts.forEach(function (m) {
+      m.addedNodes.forEach(function (n) {
+        if (n.nodeType !== 1) return;
+        if (n.tagName === 'VIDEO') collega(n);
+        else if (n.querySelectorAll) n.querySelectorAll('video').forEach(collega);
+      });
+    });
+  }).observe(document.body, { childList: true, subtree: true });
+
+  // Aggancio per il player YouTube, quando ci sara'
+  window.psyTheme = {
+    pause:  function () { if (!audio.paused) { messaInPausaDalVideo = true; audio.pause(); } },
+    resume: function () {
+      if (messaInPausaDalVideo && !spentoDallUtente) {
+        messaInPausaDalVideo = false;
+        audio.play().catch(function () {});
+      }
+    }
+  };
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------------
+   PRE-REGISTRATION
+   Posts straight to Supabase with the public key. That key can do exactly
+   one thing on this table: insert. The only RLS policy on
+   `preregistrations` is an INSERT policy, so reading the list back with it
+   returns an empty array - the addresses cannot be harvested from here.
+   A repeated address comes back 409 (unique index on lower(email)), which
+   from the visitor's side is still a success.
+   --------------------------------------------------------------------- */
+(function () {
+  var ENDPOINT = 'https://enpsjmhdanedioipuyyi.supabase.co/rest/v1/preregistrations';
+  var KEY = 'sb_publishable_RPIzcnLHWe9w2rnySENSqw_K_rSsNPf';
+
+  var form = document.getElementById('signup');
+  if (!form) return;
+  var input = document.getElementById('email');
+  var btn = document.getElementById('signup-btn');
+  var msg = document.getElementById('signup-msg');
+  var row = form.querySelector('.signup-row');
+
+  function say(state, text) { msg.dataset.state = state; msg.textContent = text; }
+  function done(text) { row.style.display = 'none'; say('ok', text); }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (form.website.value) return;   /* honeypot filled: not a person */
+    var email = input.value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      say('err', 'That address does not look right.');
+      input.focus();
+      return;
+    }
+    btn.disabled = true;
+    say('', 'Sending...');
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'apikey': KEY,
+        'Authorization': 'Bearer ' + KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email: email, source: 'site' })
+    }).then(function (r) {
+      if (r.status === 201) {
+        done('You are on the list. The link arrives on 25 September.');
+      } else if (r.status === 409) {
+        done('You were already on the list — see you on the 25th.');
+      } else {
+        btn.disabled = false;
+        say('err', 'Something went wrong. Try again in a minute.');
+      }
+    }).catch(function () {
+      btn.disabled = false;
+      say('err', 'No connection. Try again in a minute.');
+    });
+  });
+})();
+</script>
+</body>
+</html>
