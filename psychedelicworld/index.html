@@ -862,25 +862,18 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
   var KEY = 'pw_noads';
 
   var q = window.location.search;
-  try {
-    if (q.indexOf('noads') !== -1) localStorage.setItem(KEY, '1');
-    else if (q.indexOf('ads') !== -1) localStorage.removeItem(KEY);
-  } catch (e) { /* private window: fall through and just show them */ }
-
-  var muted = false;
-  try { muted = localStorage.getItem(KEY) === '1'; } catch (e) {}
-  if (muted) return;
-
   var rails = [document.getElementById('rail-l'), document.getElementById('rail-r')];
 
-  /* ?adpreview draws the slots as empty outlines and loads nothing. It is the
-     only way to judge "is this invasive" before the ads are real, and it works
-     at any window size: shrink the window and the rails vanish, which is the
-     honest answer about what a phone sees. */
   if (q.indexOf('adpreview') !== -1) {
-    /* Forced visible at ANY width, on purpose. The media query would hide them
-       on a normal laptop and leave you judging a blank page. The badge tells
-       you separately whether a real visitor would see them at this size. */
+    /* Checked BEFORE the mute below, and that order matters: the owner is
+       told to open ?noads on their own devices, which would otherwise make
+       this return early and draw nothing on precisely the machine that needs
+       to inspect it. The preview loads nothing from Google, so running it on
+       a muted device is not a risk.
+
+       Forced visible at ANY width, on purpose: the media query would hide
+       them on a normal laptop and leave you judging a blank page. The badge
+       says separately whether a real visitor would see them at this size. */
     rails.forEach(function (r) {
       r.hidden = false;
       r.style.display = 'block';
@@ -920,6 +913,17 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
     document.body.appendChild(note);
     return;
   }
+
+  try {
+    if (q.indexOf('noads') !== -1) localStorage.setItem(KEY, '1');
+    else if (q.indexOf('ads') !== -1) localStorage.removeItem(KEY);
+  } catch (e) { /* private window: fall through and just show them */ }
+
+  var muted = false;
+  try { muted = localStorage.getItem(KEY) === '1'; } catch (e) {}
+  if (muted) return;
+
+
 
   var ready = rails.every(function (r) {
     var ins = r && r.querySelector('ins');
