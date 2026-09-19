@@ -264,7 +264,7 @@ ul.checks li::before{content:"◆";position:absolute;left:0;top:0;color:var(--cy
 /* ---------- in-content ads (narrow screens only) ---------- */
 /* The exact complement of the rails: these exist below 1600, the rails above.
    Never both, so no screen ever carries eight ad slots. */
-.inslot{display:none;margin:8px auto 28px;text-align:center;width:min(100%,336px)}
+.inslot{display:none;margin:8px auto 28px;text-align:center;width:100%}
 @media(max-width:1599px){.inslot{display:block}}
 .inslot .label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
   color:var(--muted);opacity:.45;margin-bottom:6px}
@@ -438,9 +438,10 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
   <div class="wrap">
     <div class="label">Ad</div>
     <ins class="adsbygoogle"
+         style="display:block"
          data-ad-client="ca-pub-7955660421679396"
-         data-ad-slot=""
-         data-ad-format="horizontal"
+         data-ad-slot="9681700816"
+         data-ad-format="auto"
          data-full-width-responsive="true"></ins>
   </div>
 </div>
@@ -487,9 +488,10 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
   <div class="wrap">
     <div class="label">Ad</div>
     <ins class="adsbygoogle"
+         style="display:block"
          data-ad-client="ca-pub-7955660421679396"
-         data-ad-slot=""
-         data-ad-format="horizontal"
+         data-ad-slot="9681700816"
+         data-ad-format="auto"
          data-full-width-responsive="true"></ins>
   </div>
 </div>
@@ -980,10 +982,10 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
     });
 
     document.querySelectorAll('.inslot ins').forEach(function (ins) {
-      ins.style.cssText += ';border:2px dashed rgba(157,92,255,.6);height:100px;' +
+      ins.style.cssText += ';border:2px dashed rgba(157,92,255,.6);height:250px;' +
         'display:grid;place-items:center;color:#a795c9;font-size:.72rem;' +
         'letter-spacing:.1em;background:rgba(157,92,255,.06)';
-      ins.textContent = 'in-content, phones and laptops';
+      ins.textContent = 'in-content · up to ~280px tall';
     });
 
     var note = document.createElement('div');
