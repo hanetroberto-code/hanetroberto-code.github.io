@@ -261,6 +261,18 @@ ul.checks li::before{content:"◆";position:absolute;left:0;top:0;color:var(--cy
 .rail .label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
   color:var(--muted);opacity:.45;text-align:center;margin-bottom:6px}
 
+/* ---------- in-content ads (narrow screens only) ---------- */
+/* The exact complement of the rails: these exist below 1600, the rails above.
+   Never both, so no screen ever carries eight ad slots. */
+.inslot{display:none;margin:8px auto 28px;text-align:center;width:min(100%,336px)}
+@media(max-width:1599px){.inslot{display:block}}
+.inslot .label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);opacity:.45;margin-bottom:6px}
+/* No reserved height: while the slot is empty a held-open gap reads as a
+   broken page. It costs a small jump when an ad does arrive, which is the
+   honest trade for not showing a hole to everybody in the meantime. */
+.inslot ins{display:block;width:100%}
+
 /* ---------- sign-up ---------- */
 .signup{max-width:540px;margin:0 auto;position:relative}
 .signup-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
@@ -422,6 +434,17 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
   </div>
 </section>
 
+<div class="inslot">
+  <div class="wrap">
+    <div class="label">Ad</div>
+    <ins class="adsbygoogle"
+         data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot=""
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+  </div>
+</div>
+
 <section id="worlds">
   <div class="wrap">
     <div class="head">
@@ -459,6 +482,17 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
     </div>
   </div>
 </section>
+
+<div class="inslot">
+  <div class="wrap">
+    <div class="label">Ad</div>
+    <ins class="adsbygoogle"
+         data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot=""
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+  </div>
+</div>
 
 <section id="store">
   <div class="wrap">
@@ -945,6 +979,13 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
       });
     });
 
+    document.querySelectorAll('.inslot ins').forEach(function (ins) {
+      ins.style.cssText += ';border:2px dashed rgba(157,92,255,.6);height:100px;' +
+        'display:grid;place-items:center;color:#a795c9;font-size:.72rem;' +
+        'letter-spacing:.1em;background:rgba(157,92,255,.06)';
+      ins.textContent = 'in-content, phones and laptops';
+    });
+
     var note = document.createElement('div');
     note.style.cssText = 'position:fixed;left:50%;bottom:14px;transform:translateX(-50%);' +
       'z-index:60;background:rgba(5,2,18,.95);border:1px solid rgba(157,92,255,.6);' +
@@ -997,21 +1038,25 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
 
 
 
-  var slots = [];
-  rails.forEach(function (r) {
-    if (r) r.querySelectorAll('ins').forEach(function (i) { slots.push(i); });
-  });
+  // Same threshold as the CSS, and the whole decision rests on it: wide
+  // screens get the rails, narrow screens get the in-content units, and an
+  // ad is never pushed into a box the CSS has hidden.
+  var wide = window.matchMedia('(min-width: 1600px)');
+
+  function activeSlots() {
+    var out = [];
+    var scope = wide.matches ? '.rail ins' : '.inslot ins';
+    document.querySelectorAll(scope).forEach(function (i) { out.push(i); });
+    return out;
+  }
+
+  var slots = activeSlots();
   // Every slot needs its own id. Half filled would pull in Google's script
   // only to render blanks, which is the worst of both.
   var ready = slots.length > 0 && slots.every(function (i) {
     return i.getAttribute('data-ad-slot');
   });
   if (!ready) return;   // no ids yet: stay inert rather than load an empty frame
-
-  // Same threshold as the CSS. Below it the rails are display:none, and an ad
-  // pushed into a hidden box is a request nobody can see - wasted on the
-  // visitor's data, and against AdSense policy on top.
-  var wide = window.matchMedia('(min-width: 1600px)');
 
   function load() {
     var tag = document.createElement('script');
@@ -1026,16 +1071,7 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
     });
   }
 
-  if (wide.matches) {
-    load();
-  } else if (wide.addEventListener) {
-    // Somebody who widens the window later still gets them, once.
-    wide.addEventListener('change', function once(e) {
-      if (!e.matches) return;
-      wide.removeEventListener('change', once);
-      load();
-    });
-  }
+  load();
 })();
 </script>
 </body>
