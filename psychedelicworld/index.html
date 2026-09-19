@@ -517,35 +517,47 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
 <aside class="rail rail-l" id="rail-l" hidden>
   <div class="slot">
     <div class="label">Ad</div>
-    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
-         data-ad-slot="" data-ad-format="vertical"></ins>
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:160px;height:600px"
+         data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="2980561094"></ins>
   </div>
   <div class="slot">
     <div class="label">Ad</div>
-    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
-         data-ad-slot="" data-ad-format="vertical"></ins>
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:160px;height:600px"
+         data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="2980561094"></ins>
   </div>
   <div class="slot">
     <div class="label">Ad</div>
-    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
-         data-ad-slot="" data-ad-format="vertical"></ins>
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:160px;height:600px"
+         data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="2980561094"></ins>
   </div>
 </aside>
 <aside class="rail rail-r" id="rail-r" hidden>
   <div class="slot">
     <div class="label">Ad</div>
-    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
-         data-ad-slot="" data-ad-format="vertical"></ins>
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:160px;height:600px"
+         data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="2980561094"></ins>
   </div>
   <div class="slot">
     <div class="label">Ad</div>
-    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
-         data-ad-slot="" data-ad-format="vertical"></ins>
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:160px;height:600px"
+         data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="2980561094"></ins>
   </div>
   <div class="slot">
     <div class="label">Ad</div>
-    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
-         data-ad-slot="" data-ad-format="vertical"></ins>
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:160px;height:600px"
+         data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="2980561094"></ins>
   </div>
 </aside>
 
@@ -989,16 +1001,34 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
   });
   if (!ready) return;   // no ids yet: stay inert rather than load an empty frame
 
-  var tag = document.createElement('script');
-  tag.async = true;
-  tag.crossOrigin = 'anonymous';
-  tag.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7955660421679396';
-  document.head.appendChild(tag);
+  // Same threshold as the CSS. Below it the rails are display:none, and an ad
+  // pushed into a hidden box is a request nobody can see - wasted on the
+  // visitor's data, and against AdSense policy on top.
+  var wide = window.matchMedia('(min-width: 1600px)');
 
-  rails.forEach(function (r) { if (r) r.hidden = false; });
-  slots.forEach(function () {
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
-  });
+  function load() {
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.crossOrigin = 'anonymous';
+    tag.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7955660421679396';
+    document.head.appendChild(tag);
+
+    rails.forEach(function (r) { if (r) r.hidden = false; });
+    slots.forEach(function () {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    });
+  }
+
+  if (wide.matches) {
+    load();
+  } else if (wide.addEventListener) {
+    // Somebody who widens the window later still gets them, once.
+    wide.addEventListener('change', function once(e) {
+      if (!e.matches) return;
+      wide.removeEventListener('change', once);
+      load();
+    });
+  }
 })();
 </script>
 </body>
