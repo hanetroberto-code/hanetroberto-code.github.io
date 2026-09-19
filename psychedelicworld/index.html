@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Psychedelic World — a 3D trip you can play with friends</title>
-<meta name="description" content="Psychedelic World is a 3D psychedelic open-world playground: one neon hub, seven reinvented arcade minigames, four surreal zones, fifteen playable characters and online co-op. Free on Windows and Android, 25 September 2026. Built in Godot 4.">
+<meta name="description" content="Psychedelic World is a 3D psychedelic open-world playground: one neon hub, seven reinvented arcade minigames, three surreal zones, fifteen playable characters and online co-op. Free on Windows and Android, 25 September 2026. Built in Godot 4.">
 <link rel="icon" href="assets/icon.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://hanetroberto-code.github.io/psychedelicworld/">
 <meta property="og:title" content="Psychedelic World - out 25 September 2026">
-<meta property="og:description" content="One neon hub. Seven reinvented arcade games. Four surreal worlds. Bring friends. Free on Windows and Android.">
+<meta property="og:description" content="One neon hub. Seven reinvented arcade games. Three surreal worlds. Bring friends. Free on Windows and Android.">
 <!-- Absolute, not relative: every social scraper fetches this from its own
      server, where a relative path resolves to nothing. -->
 <meta property="og:image" content="https://hanetroberto-code.github.io/psychedelicworld/assets/PsyIsland.png">
 <meta property="og:image:alt" content="A psychedelic island of giant glowing mushrooms">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Psychedelic World - out 25 September 2026">
-<meta name="twitter:description" content="One neon hub. Seven reinvented arcade games. Four surreal worlds. Free on Windows and Android.">
+<meta name="twitter:description" content="One neon hub. Seven reinvented arcade games. Three surreal worlds. Free on Windows and Android.">
 <meta name="twitter:image" content="https://hanetroberto-code.github.io/psychedelicworld/assets/PsyIsland.png">
 <link rel="canonical" href="https://hanetroberto-code.github.io/psychedelicworld/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +32,7 @@
 }
 html{scroll-behavior:smooth}
 body{
+  position:relative;   /* the ad columns are positioned against this */
   margin:0; background:var(--void); color:var(--text);
   font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,sans-serif;
   font-size:17px; line-height:1.65; overflow-x:hidden;
@@ -233,11 +234,24 @@ ul.checks li::before{content:"◆";position:absolute;left:0;top:0;color:var(--cy
 /* Fixed in the margins, never over the page. They only exist from 1500px up:
    below that the content is the whole window and there is no margin to put
    them in, so they simply do not render. Nothing is pushed, nothing reflows. */
-.rail{position:fixed;top:50%;transform:translateY(-50%);z-index:5;
-  width:160px;min-height:600px;display:none}
+/* Absolute against the document, not fixed to the window. Stacking them while
+   fixed is arithmetic that does not work: a slot is 600px tall, two are 1200
+   plus a gap, and a 1080p browser shows about 940 - they would be guillotined
+   top and bottom. Down the page there are thousands of pixels instead. */
+.rail{position:absolute;top:0;height:100%;width:160px;z-index:5;display:none;
+  pointer-events:none}
 .rail-l{left:24px}
 .rail-r{right:24px}
 @media(min-width:1600px){.rail{display:block}}
+.rail .slot{position:absolute;width:160px;pointer-events:auto}
+/* Spread down the page, and deliberately NOT level with each other side to
+   side: two ads at the same height read as a frame around the content. */
+.rail-l .slot:nth-child(1){top:14%}
+.rail-l .slot:nth-child(2){top:44%}
+.rail-l .slot:nth-child(3){top:74%}
+.rail-r .slot:nth-child(1){top:24%}
+.rail-r .slot:nth-child(2){top:54%}
+.rail-r .slot:nth-child(3){top:84%}
 /* An empty slot must not leave a grey brick in the margin. */
 .rail ins{display:block;width:160px;height:600px;background:transparent}
 .rail .label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
@@ -294,7 +308,7 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
   <div class="wrap">
     <div class="badge"><span class="dot"></span> Out 25 September 2026 · Windows &amp; Android</div>
     <h1>Enter the <span class="g">Psychedelic World</span></h1>
-    <p>One neon hub. Seven reinvented arcade games hidden behind living portals. Four surreal worlds to get lost in. Bring friends — the whole trip is playable online.</p>
+    <p>One neon hub. Seven reinvented arcade games hidden behind living portals. Three surreal worlds to get lost in. Bring friends — the whole trip is playable online.</p>
     <div class="cta">
       <a class="btn btn-primary" href="#play">Get the launch link →</a>
       <a class="btn btn-ghost" href="#trailer">Watch the trailer</a>
@@ -303,7 +317,7 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
 
     <div class="stats">
       <div class="stat"><b>7</b><span>Minigames</span></div>
-      <div class="stat"><b>4</b><span>Worlds</span></div>
+      <div class="stat"><b>3</b><span>Worlds</span></div>
       <div class="stat"><b>15</b><span>Characters</span></div>
       <div class="stat"><b>P2P</b><span>Online co-op</span></div>
     </div>
@@ -408,13 +422,12 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">Worlds</p>
-      <h2>Four places worth wandering off into</h2>
+      <h2>Three places worth wandering off into</h2>
       <p>Not levels with an exit at the end — open zones you can drop into with friends and just mess around in.</p>
     </div>
     <div class="grid g2">
       <div class="card"><figure class="shot"><img src="assets/PsyWar.webp" alt="Warzone Island" loading="lazy"><figcaption>Cover, sightlines, and nowhere safe for long</figcaption></figure><h3>Warzone Island</h3><p>A jagged PvP island built for color combat: cover, sightlines and six spawn rings around the center. Home of the free-for-all mode.</p></div>
-      <div class="card"><figure class="shot"><img src="assets/NeonCity.webp" alt="Neon City" loading="lazy"><figcaption>Rooftops after dark</figcaption></figure><h3>Neon City</h3><p>A vertical city drowning in signage and reflections. Rooftops, alleys and a skyline that never stops shifting hue.</p></div>
-      <div class="card"><figure class="shot"><img src="assets/Neon.webp" alt="Neon City II" loading="lazy"><figcaption>Wider streets, bigger drops</figcaption></figure><h3>Neon City II</h3><p>The second district — wider streets, bigger drops, more room to run and shoot.</p></div>
+      <div class="card"><figure class="shot"><img src="assets/NeonCity.webp" alt="Neon City" loading="lazy"><figcaption>Rooftops after dark</figcaption></figure><h3>Neon City</h3><p>A vertical city drowning in signage and reflections. Two districts grown into one: towers and rooftops on one side, wider streets and bigger drops on the other.</p></div>
       <div class="card"><figure class="shot"><img src="assets/PsyIsland.webp" alt="Psy Island" loading="lazy"><figcaption>Giant mushrooms, and a plot of land with your name on it</figcaption></figure><h3>Psy Island</h3><p>The calm one. Impossible flora, warm horizons, and the best place to find out what your perception powers really do to a landscape.</p></div>
     </div>
   </div>
@@ -498,14 +511,38 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
      markup: no script is fetched and no request leaves the page.
      ──────────────────────────────────────────────────────────────────── -->
 <aside class="rail rail-l" id="rail-l" hidden>
-  <div class="label">Ad</div>
-  <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
-       data-ad-slot="" data-ad-format="vertical"></ins>
+  <div class="slot">
+    <div class="label">Ad</div>
+    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="" data-ad-format="vertical"></ins>
+  </div>
+  <div class="slot">
+    <div class="label">Ad</div>
+    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="" data-ad-format="vertical"></ins>
+  </div>
+  <div class="slot">
+    <div class="label">Ad</div>
+    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="" data-ad-format="vertical"></ins>
+  </div>
 </aside>
 <aside class="rail rail-r" id="rail-r" hidden>
-  <div class="label">Ad</div>
-  <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
-       data-ad-slot="" data-ad-format="vertical"></ins>
+  <div class="slot">
+    <div class="label">Ad</div>
+    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="" data-ad-format="vertical"></ins>
+  </div>
+  <div class="slot">
+    <div class="label">Ad</div>
+    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="" data-ad-format="vertical"></ins>
+  </div>
+  <div class="slot">
+    <div class="label">Ad</div>
+    <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
+         data-ad-slot="" data-ad-format="vertical"></ins>
+  </div>
 </aside>
 
 <footer>
@@ -877,11 +914,14 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
     rails.forEach(function (r) {
       r.hidden = false;
       r.style.display = 'block';
-      var ins = r.querySelector('ins');
-      ins.style.cssText += ';border:2px dashed rgba(157,92,255,.6);display:grid;' +
-        'place-items:center;color:#a795c9;font-size:.72rem;letter-spacing:.1em;' +
-        'background:rgba(157,92,255,.06)';
-      ins.textContent = '160 × 600';
+      var n = 0;
+      r.querySelectorAll('ins').forEach(function (ins) {
+        n += 1;
+        ins.style.cssText += ';border:2px dashed rgba(157,92,255,.6);display:grid;' +
+          'place-items:center;color:#a795c9;font-size:.72rem;letter-spacing:.1em;' +
+          'background:rgba(157,92,255,.06)';
+        ins.textContent = '160 × 600  (' + n + ')';
+      });
     });
 
     var note = document.createElement('div');
@@ -902,7 +942,8 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
       var needed = 184;
       var real = w >= 1600;
       note.innerHTML =
-        '<b>PREVIEW</b> · window ' + w + 'px · content ' + cw + 'px' +
+        '<b>PREVIEW</b> · window ' + w + 'px · content ' + cw + 'px · ' +
+          document.querySelectorAll('.rail ins').length + ' slots' +
         '<br>Ads sit in the margin and take <b>0px</b> from the content.' +
         '<br>margin ' + margin + 'px a side · a rail needs ' + needed + 'px' +
         '<br>' + (real
@@ -933,9 +974,14 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
 
 
 
-  var ready = rails.every(function (r) {
-    var ins = r && r.querySelector('ins');
-    return ins && ins.getAttribute('data-ad-slot');
+  var slots = [];
+  rails.forEach(function (r) {
+    if (r) r.querySelectorAll('ins').forEach(function (i) { slots.push(i); });
+  });
+  // Every slot needs its own id. Half filled would pull in Google's script
+  // only to render blanks, which is the worst of both.
+  var ready = slots.length > 0 && slots.every(function (i) {
+    return i.getAttribute('data-ad-slot');
   });
   if (!ready) return;   // no ids yet: stay inert rather than load an empty frame
 
@@ -945,8 +991,8 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
   tag.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7955660421679396';
   document.head.appendChild(tag);
 
-  rails.forEach(function (r) {
-    r.hidden = false;
+  rails.forEach(function (r) { if (r) r.hidden = false; });
+  slots.forEach(function () {
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   });
 })();
