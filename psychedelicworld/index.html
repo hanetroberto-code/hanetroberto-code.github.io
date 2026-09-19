@@ -237,7 +237,7 @@ ul.checks li::before{content:"◆";position:absolute;left:0;top:0;color:var(--cy
   width:160px;min-height:600px;display:none}
 .rail-l{left:24px}
 .rail-r{right:24px}
-@media(min-width:1500px){.rail{display:block}}
+@media(min-width:1600px){.rail{display:block}}
 /* An empty slot must not leave a grey brick in the margin. */
 .rail ins{display:block;width:160px;height:600px;background:transparent}
 .rail .label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
@@ -895,13 +895,21 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
       var w = window.innerWidth;
       var content = document.querySelector('.wrap');
       var cw = content ? Math.round(content.getBoundingClientRect().width) : 0;
-      var real = w >= 1500;
+      // Same sum the CSS makes: half the leftover margin, against what a
+      // rail needs. Printed rather than asserted, so the preview can be
+      // trusted instead of believed.
+      var margin = Math.round((w - cw) / 2);
+      var needed = 184;
+      var real = w >= 1600;
       note.innerHTML =
         '<b>PREVIEW</b> · window ' + w + 'px · content ' + cw + 'px' +
         '<br>Ads sit in the margin and take <b>0px</b> from the content.' +
+        '<br>margin ' + margin + 'px a side · a rail needs ' + needed + 'px' +
         '<br>' + (real
           ? 'A real visitor at this width <b>would</b> see them.'
-          : 'A real visitor at this width would see <b>nothing</b> — this is a phone.') +
+          : (margin < needed
+            ? 'Forced on for you only — at this width they would <b>overlap the text</b>, so a real visitor never sees them.'
+            : 'A real visitor at this width would see <b>nothing</b>.')) +
         '<br><span style="opacity:.6">click here to toggle them and watch the page not move</span>';
     }
     note.addEventListener('click', function () {
