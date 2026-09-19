@@ -872,6 +872,34 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
   if (muted) return;
 
   var rails = [document.getElementById('rail-l'), document.getElementById('rail-r')];
+
+  /* ?adpreview draws the slots as empty outlines and loads nothing. It is the
+     only way to judge "is this invasive" before the ads are real, and it works
+     at any window size: shrink the window and the rails vanish, which is the
+     honest answer about what a phone sees. */
+  if (q.indexOf('adpreview') !== -1) {
+    rails.forEach(function (r) {
+      r.hidden = false;
+      var ins = r.querySelector('ins');
+      ins.style.cssText += ';border:2px dashed rgba(157,92,255,.5);display:grid;' +
+        'place-items:center;color:#a795c9;font-size:.72rem;letter-spacing:.1em';
+      ins.textContent = '160 × 600';
+    });
+    var note = document.createElement('div');
+    note.style.cssText = 'position:fixed;left:50%;bottom:14px;transform:translateX(-50%);' +
+      'z-index:60;background:rgba(5,2,18,.94);border:1px solid rgba(157,92,255,.5);' +
+      'border-radius:999px;padding:8px 18px;font-size:.78rem;color:#f2ecff';
+    function tell() {
+      var w = window.innerWidth;
+      note.textContent = 'PREVIEW · window ' + w + 'px · ' +
+        (w >= 1500 ? 'rails shown' : 'no ads at this width — this is what a phone sees');
+    }
+    tell();
+    window.addEventListener('resize', tell);
+    document.body.appendChild(note);
+    return;
+  }
+
   var ready = rails.every(function (r) {
     var ins = r && r.querySelector('ins');
     return ins && ins.getAttribute('data-ad-slot');
