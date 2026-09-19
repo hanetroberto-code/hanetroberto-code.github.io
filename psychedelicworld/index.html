@@ -878,22 +878,43 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
      at any window size: shrink the window and the rails vanish, which is the
      honest answer about what a phone sees. */
   if (q.indexOf('adpreview') !== -1) {
+    /* Forced visible at ANY width, on purpose. The media query would hide them
+       on a normal laptop and leave you judging a blank page. The badge tells
+       you separately whether a real visitor would see them at this size. */
     rails.forEach(function (r) {
       r.hidden = false;
+      r.style.display = 'block';
       var ins = r.querySelector('ins');
-      ins.style.cssText += ';border:2px dashed rgba(157,92,255,.5);display:grid;' +
-        'place-items:center;color:#a795c9;font-size:.72rem;letter-spacing:.1em';
+      ins.style.cssText += ';border:2px dashed rgba(157,92,255,.6);display:grid;' +
+        'place-items:center;color:#a795c9;font-size:.72rem;letter-spacing:.1em;' +
+        'background:rgba(157,92,255,.06)';
       ins.textContent = '160 × 600';
     });
+
     var note = document.createElement('div');
     note.style.cssText = 'position:fixed;left:50%;bottom:14px;transform:translateX(-50%);' +
-      'z-index:60;background:rgba(5,2,18,.94);border:1px solid rgba(157,92,255,.5);' +
-      'border-radius:999px;padding:8px 18px;font-size:.78rem;color:#f2ecff';
+      'z-index:60;background:rgba(5,2,18,.95);border:1px solid rgba(157,92,255,.6);' +
+      'border-radius:14px;padding:10px 20px;font-size:.78rem;color:#f2ecff;' +
+      'cursor:pointer;text-align:center;line-height:1.5;max-width:92vw';
+
+    var shown = true;
     function tell() {
       var w = window.innerWidth;
-      note.textContent = 'PREVIEW · window ' + w + 'px · ' +
-        (w >= 1500 ? 'rails shown' : 'no ads at this width — this is what a phone sees');
+      var content = document.querySelector('.wrap');
+      var cw = content ? Math.round(content.getBoundingClientRect().width) : 0;
+      var real = w >= 1500;
+      note.innerHTML =
+        '<b>PREVIEW</b> · window ' + w + 'px · content ' + cw + 'px' +
+        '<br>Ads sit in the margin and take <b>0px</b> from the content.' +
+        '<br>' + (real
+          ? 'A real visitor at this width <b>would</b> see them.'
+          : 'A real visitor at this width would see <b>nothing</b> — this is a phone.') +
+        '<br><span style="opacity:.6">click here to toggle them and watch the page not move</span>';
     }
+    note.addEventListener('click', function () {
+      shown = !shown;
+      rails.forEach(function (r) { r.style.display = shown ? 'block' : 'none'; });
+    });
     tell();
     window.addEventListener('resize', tell);
     document.body.appendChild(note);
