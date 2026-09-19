@@ -927,9 +927,14 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
        Forced visible at ANY width, on purpose: the media query would hide
        them on a normal laptop and leave you judging a blank page. The badge
        says separately whether a real visitor would see them at this size. */
+    // Forced on for a desktop window, so the size and position can be judged
+    // even below the real breakpoint. NOT on a phone: down there the honest
+    // preview of "no ads" is no ads, and drawing them over the text shows
+    // something no visitor will ever meet.
+    var simulate = window.innerWidth >= 1100;
     rails.forEach(function (r) {
       r.hidden = false;
-      r.style.display = 'block';
+      r.style.display = simulate ? 'block' : 'none';
       var n = 0;
       r.querySelectorAll('ins').forEach(function (ins) {
         n += 1;
@@ -967,9 +972,11 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
           : (margin < needed
             ? 'Forced on for you only — at this width they would <b>overlap the text</b>, so a real visitor never sees them.'
             : 'A real visitor at this width would see <b>nothing</b>.')) +
+        (w < 1100 ? '<br>Not drawn at all here: this is a phone, and a phone gets no ads.' : '') +
         '<br><span style="opacity:.6">click here to toggle them and watch the page not move</span>';
     }
     note.addEventListener('click', function () {
+      if (window.innerWidth < 1100) return;   // nothing to toggle down here
       shown = !shown;
       rails.forEach(function (r) { r.style.display = shown ? 'block' : 'none'; });
     });
