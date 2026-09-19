@@ -229,6 +229,20 @@ ul.checks li::before{content:"◆";position:absolute;left:0;top:0;color:var(--cy
   .player-facade .play::after{border-width:11px 0 11px 18px;margin-left:5px}}
 @media(prefers-reduced-motion:reduce){.player-facade img,.player-facade .play{transition:none}}
 
+/* ---------- ad rails ---------- */
+/* Fixed in the margins, never over the page. They only exist from 1500px up:
+   below that the content is the whole window and there is no margin to put
+   them in, so they simply do not render. Nothing is pushed, nothing reflows. */
+.rail{position:fixed;top:50%;transform:translateY(-50%);z-index:5;
+  width:160px;min-height:600px;display:none}
+.rail-l{left:24px}
+.rail-r{right:24px}
+@media(min-width:1500px){.rail{display:block}}
+/* An empty slot must not leave a grey brick in the margin. */
+.rail ins{display:block;width:160px;height:600px;background:transparent}
+.rail .label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);opacity:.45;text-align:center;margin-bottom:6px}
+
 /* ---------- sign-up ---------- */
 .signup{max-width:540px;margin:0 auto;position:relative}
 .signup-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
@@ -250,6 +264,7 @@ ul.checks li::before{content:"◆";position:absolute;left:0;top:0;color:var(--cy
 footer{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--muted);font-size:.87rem}
 footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
 footer a{color:var(--cyan);text-decoration:none}
+footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
 .disclaimer{margin-top:22px;font-size:.79rem;opacity:.7;max-width:74ch;line-height:1.6}
 </style>
 </head>
@@ -473,11 +488,33 @@ footer a{color:var(--cyan);text-decoration:none}
 
 </main>
 
+<!-- ─────────────────────────────────────────────────────────────────────
+     ADS
+     Two rails in the margins on wide screens. Deliberately nothing on a
+     phone: almost all the traffic here arrives from TikTok, and an ad in
+     the middle of a one-page pitch costs more in sign-ups than it earns.
+
+     They render only once BOTH ids below are real. Until then this is inert
+     markup: no script is fetched and no request leaves the page.
+     ──────────────────────────────────────────────────────────────────── -->
+<aside class="rail rail-l" id="rail-l" hidden>
+  <div class="label">Ad</div>
+  <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
+       data-ad-slot="" data-ad-format="vertical"></ins>
+</aside>
+<aside class="rail rail-r" id="rail-r" hidden>
+  <div class="label">Ad</div>
+  <ins class="adsbygoogle" data-ad-client="ca-pub-7955660421679396"
+       data-ad-slot="" data-ad-format="vertical"></ins>
+</aside>
+
 <footer>
   <div class="wrap">
     <div class="row">
       <div><strong>Psychedelic World</strong> — built with Godot 4</div>
       <div><a href="../">More by Hanet Roberto</a> · <a href="#play">Get the launch link</a></div>
+      <div class="privacy">Your email is only ever used to send the launch link. This page
+        carries ads from Google, which may set cookies.</div>
     </div>
     <p class="disclaimer">PsyCrush, PsyLine, PsyPop, PsyRun, PsyChomp, PsyTenis and PsyDanceFloor are original games inspired by arcade genres. They are not affiliated with, endorsed by, or connected to any existing game or trademark holder.</p>
   </div>
@@ -800,6 +837,56 @@ footer a{color:var(--cyan);text-decoration:none}
     var tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(tag);
+  });
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------------
+   ADS, AND THE SWITCH THAT KEEPS THEM OFF YOUR OWN SCREEN
+
+   Visiting your own ads is the fastest way to get an AdSense account shut
+   down, and "remember not to go there" is not a plan — it fails the first
+   time you send the link to somebody at home. So: open the page once as
+
+       ...psychedelicworld/?noads
+
+   and this device never loads the ad script again, on any visit. It is
+   kept in localStorage, so it survives closing the browser. `?ads` turns
+   it back on.
+
+   Nothing is requested until both slot ids are filled in, which means the
+   page today makes no call to Google at all.
+   --------------------------------------------------------------------- */
+(function () {
+  var KEY = 'pw_noads';
+
+  var q = window.location.search;
+  try {
+    if (q.indexOf('noads') !== -1) localStorage.setItem(KEY, '1');
+    else if (q.indexOf('ads') !== -1) localStorage.removeItem(KEY);
+  } catch (e) { /* private window: fall through and just show them */ }
+
+  var muted = false;
+  try { muted = localStorage.getItem(KEY) === '1'; } catch (e) {}
+  if (muted) return;
+
+  var rails = [document.getElementById('rail-l'), document.getElementById('rail-r')];
+  var ready = rails.every(function (r) {
+    var ins = r && r.querySelector('ins');
+    return ins && ins.getAttribute('data-ad-slot');
+  });
+  if (!ready) return;   // no ids yet: stay inert rather than load an empty frame
+
+  var tag = document.createElement('script');
+  tag.async = true;
+  tag.crossOrigin = 'anonymous';
+  tag.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7955660421679396';
+  document.head.appendChild(tag);
+
+  rails.forEach(function (r) {
+    r.hidden = false;
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
   });
 })();
 </script>
