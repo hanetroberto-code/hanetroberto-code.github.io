@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Psychedelic World — a 3D trip you can play with friends</title>
+<title>Psychedelic World — a 3D world you can play with friends</title>
 <meta name="description" content="Psychedelic World is a 3D psychedelic open-world playground: one neon hub, eight reinvented arcade minigames, three surreal zones, fifteen playable characters and online co-op. Free on Windows and Android, 25 September 2026. Built in Godot 4.">
 <link rel="icon" href="assets/icon.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://hanetroberto-code.github.io/psychedelicworld/">
-<meta property="og:title" content="Psychedelic World - out 25 September 2026">
+<meta property="og:title" content="Psychedelic World - out now, free on Windows and Android">
 <meta property="og:description" content="One neon hub. Eight reinvented arcade games. Three surreal worlds. Bring friends. Free on Windows and Android.">
 <!-- Absolute, not relative: every social scraper fetches this from its own
      server, where a relative path resolves to nothing. -->
 <meta property="og:image" content="https://hanetroberto-code.github.io/psychedelicworld/assets/PsyIsland.png">
 <meta property="og:image:alt" content="A psychedelic island of giant glowing mushrooms">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Psychedelic World - out 25 September 2026">
+<meta name="twitter:title" content="Psychedelic World - out now, free on Windows and Android">
 <meta name="twitter:description" content="One neon hub. Eight reinvented arcade games. Three surreal worlds. Free on Windows and Android.">
 <meta name="twitter:image" content="https://hanetroberto-code.github.io/psychedelicworld/assets/PsyIsland.png">
 <link rel="canonical" href="https://hanetroberto-code.github.io/psychedelicworld/">
@@ -296,6 +296,62 @@ footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;a
 footer a{color:var(--cyan);text-decoration:none}
 footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
 .disclaimer{margin-top:22px;font-size:.79rem;opacity:.7;max-width:74ch;line-height:1.6}
+
+/* ---------- download ---------- */
+.dl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:760px){.dl-grid{grid-template-columns:1fr}}
+.dl{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.dl .plat{display:flex;align-items:center;gap:12px;padding-right:120px}
+.dl .plat svg{width:30px;height:30px;color:var(--cyan);flex:none}
+.dl.soon .plat svg{color:var(--muted)}
+.dl .meta{font-size:.84rem;color:var(--muted);letter-spacing:.02em}
+.dl .hint,.guide .hint{font-size:.84rem;color:var(--muted);margin:0}
+.dl .hint a,.guide .hint a{color:var(--cyan)}
+.state{position:absolute;top:22px;right:22px;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid}
+.state.live{color:var(--lime);border-color:rgba(180,255,61,.45);background:rgba(180,255,61,.08)}
+.state.wait{color:var(--amber);border-color:rgba(255,176,32,.45);background:rgba(255,176,32,.08)}
+.btn[aria-disabled=true]{opacity:.5;cursor:default}
+.btn[aria-disabled=true]:hover{transform:none;border-color:var(--line);color:var(--text)}
+.notify{margin-top:44px;padding:44px 28px}
+.notify h3{font-size:clamp(1.4rem,3vw,1.9rem)}
+.notify .signup-msg:empty{min-height:0;margin:0}
+
+/* ---------- install guide ---------- */
+/* The warning boxes are drawn, not screenshots: lighter, sharp at any size,
+   and nobody else's image. The pink rings and numbers say where to tap. */
+.steps{margin:6px 0 22px;padding-left:1.3em;color:var(--muted);font-size:.95rem}
+.steps li{margin:0 0 10px}
+.steps b{color:var(--text)}
+.mocks{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:520px){.mocks{grid-template-columns:1fr}}
+.mock{position:relative;font-family:'Segoe UI',system-ui,sans-serif;font-size:.8rem;line-height:1.45}
+.mock.win{background:#0f5fa6;color:#fff;padding:18px 18px 16px;border-radius:6px;max-width:440px}
+.mock.win .mock-t{font-size:1.2rem;font-weight:600;margin-bottom:8px}
+.mock.win p{margin:0 0 10px;color:#e6f0fb}
+.mock-link{display:inline-block;text-decoration:underline;margin:0 0 10px 4px}
+.mock-small{font-size:.74rem;opacity:.9}
+.mock-btns{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+.mock-btn{padding:6px 14px;border:1px solid rgba(255,255,255,.7);border-radius:3px}
+.mock.droid{background:#f4f1f8;color:#1b1b1f;padding:16px 14px;border-radius:18px}
+.mock-bar{font-weight:600;margin-bottom:12px}
+.mock-app{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.mock-ico{width:18px;height:18px;border-radius:50%;flex:none;
+  background:conic-gradient(#ea4335 0 33%,#fbbc05 0 66%,#34a853 0);box-shadow:inset 0 0 0 5px #4285f4}
+.mock-toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border-radius:10px;background:#fff}
+.sw{width:34px;height:18px;border-radius:999px;background:#6750a4;position:relative;flex:none}
+.sw::after{content:"";position:absolute;right:3px;top:3px;width:12px;height:12px;border-radius:50%;background:#fff}
+.mock.pp{text-align:center}
+.mock-shield{width:26px;height:30px;margin:2px auto 8px;background:#1a73e8;
+  clip-path:polygon(50% 0,100% 18%,100% 55%,50% 100%,0 55%,0 18%)}
+.mock.pp .mock-t{font-weight:600;margin-bottom:8px}
+.mock.pp .mock-link{color:#1a73e8}
+.mock.pp .mock-btns{justify-content:center}
+.mock.droid .mock-btn{border:0;background:#1a73e8;color:#fff;border-radius:999px}
+.hl{outline:2px solid var(--magenta);outline-offset:3px;border-radius:6px;position:relative}
+.hl::before{content:attr(data-n);position:absolute;left:-13px;top:-13px;width:20px;height:20px;border-radius:50%;
+  background:var(--magenta);color:#fff;font:700 .7rem/20px 'Space Grotesk',sans-serif;text-align:center;
+  box-shadow:0 0 12px rgba(255,45,149,.7)}
 </style>
 </head>
 <body>
@@ -312,7 +368,7 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
         <a href="#worlds">Worlds</a>
         <a href="#online">Online</a>
         <a href="#store">Marketplace</a>
-        <a href="#play">Play</a>
+        <a href="#download">Download</a>
       </div>
     </nav>
   </div>
@@ -322,14 +378,14 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
 
 <section class="hero">
   <div class="wrap">
-    <div class="badge"><span class="dot"></span> Out 25 September 2026 · Windows &amp; Android</div>
+    <div class="badge"><span class="dot"></span> Out now · Windows &amp; Android</div>
     <h1>Enter the <span class="g">Psychedelic World</span></h1>
-    <p>One neon hub. Eight reinvented arcade games hidden behind living portals. Three surreal worlds to get lost in. Bring friends — the whole trip is playable online.</p>
+    <p>One neon hub. Eight reinvented arcade games hidden behind living portals. Three surreal worlds to get lost in. Bring friends — the whole world is playable online.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="#play">Get the launch link →</a>
+      <a class="btn btn-primary" href="#download">Download free →</a>
       <a class="btn btn-ghost" href="#trailer">Watch the trailer</a>
     </div>
-    <p class="note">Free on Windows and Android. Leave your email and the download link arrives on launch day.</p>
+    <p class="note">Free on Windows and Android. Google Play and Microsoft Store versions are on their way.</p>
 
     <div class="stats">
       <div class="stat"><b>8</b><span>Minigames</span></div>
@@ -367,7 +423,7 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
       <p class="lede">You start in the Hub: a floating psychedelic island where the ground ripples with plasma and every portal is a different game. No menus to fight — you walk up to a portal and you are in.</p>
       <ul class="checks">
         <li>Third-person movement, jump, sprint and a color-drain blaster</li>
-        <li>Perception powers that bend the screen: monochrome trips, unsteady walks, shifting vision</li>
+        <li>Perception powers that bend the screen: monochrome worlds, unsteady walks, shifting vision</li>
         <li>Pick-ups that reward exploring instead of grinding</li>
         <li>Invisible bounds that catch you if the void ever swallows you</li>
       </ul>
@@ -518,26 +574,125 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
 
 
 
-<section id="play">
+<section id="download">
   <div class="wrap">
-    <div class="final">
-      <p class="eyebrow">Friday 25 September 2026</p>
-      <h2>The portals open on the 25th</h2>
-      <p>Windows and Android, both on the same day, both free. Leave your email and the download link lands in your inbox the moment it goes live — that mail, and nothing else.</p>
+    <div class="head">
+      <p class="eyebrow">Out now · Free</p>
+      <h2>The portals are open</h2>
+      <p>Download Psychedelic World for Windows and Android right here. The store versions are on their way: Google and Microsoft are still reviewing the game.</p>
+    </div>
 
+    <div class="dl-grid">
+      <div class="card dl">
+        <span class="state live">Available</span>
+        <div class="plat">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5.1 10 4v7H3V5.1Zm8-1.25L21 2.5V11H11V3.85ZM3 13h7v7l-7-1.1V13Zm8 0h10v8.5l-10-1.35V13Z"/></svg>
+          <h3>Windows</h3>
+        </div>
+        <p class="meta">Windows 10 / 11 · 64-bit · 433 MB zip</p>
+        <a class="btn btn-primary" id="dl-win" href="https://github.com/hanetroberto-code/hanetroberto-code.github.io/releases/latest/download/PsychedelicWorld-Windows.zip">Download for Windows ↓</a>
+        <p class="hint">Extract the zip first, then run <code>PsychedelicWorld.exe</code>. <a href="#install">How to install</a></p>
+      </div>
+
+      <div class="card dl">
+        <span class="state live">Available</span>
+        <div class="plat">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 9h12v8a2 2 0 0 1-2 2h-1v2.5a1.5 1.5 0 0 1-3 0V19h0v2.5a1.5 1.5 0 0 1-3 0V19H8a2 2 0 0 1-2-2V9Zm-2.5 0A1.5 1.5 0 0 1 5 10.5v5a1.5 1.5 0 0 1-3 0v-5A1.5 1.5 0 0 1 3.5 9Zm17 0a1.5 1.5 0 0 1 1.5 1.5v5a1.5 1.5 0 0 1-3 0v-5A1.5 1.5 0 0 1 20.5 9ZM7.1 3.6l1.05 1.6A6.3 6.3 0 0 1 12 4a6.3 6.3 0 0 1 3.85 1.2l1.05-1.6a.4.4 0 1 1 .67.44l-1.03 1.57A5.9 5.9 0 0 1 18 8H6a5.9 5.9 0 0 1 1.46-2.99L6.43 4.04a.4.4 0 1 1 .67-.44ZM9.5 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg>
+          <h3>Android</h3>
+        </div>
+        <p class="meta">Phones and tablets · 481 MB APK · keep about 1.5 GB free</p>
+        <a class="btn btn-primary" id="dl-apk" href="https://github.com/hanetroberto-code/hanetroberto-code.github.io/releases/latest/download/PsychedelicWorld-Android.apk">Download for Android ↓</a>
+        <p class="hint">Your phone will ask you to allow the install. <a href="#install">How to install</a></p>
+      </div>
+
+      <div class="card dl soon">
+        <span class="state wait">In review</span>
+        <div class="plat">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.2 2.6 13.9 12l-9.7 9.4a1.6 1.6 0 0 1-.7-1.3V3.9c0-.53.26-1 .7-1.3Zm11.2 7.95 2.9 1.65a1 1 0 0 1 0 1.6l-2.9 1.65L12.9 12l2.5-1.45ZM5.6 2.2l8.9 5.1-1.9 1.8L5.6 2.2Zm7 12.7 1.9 1.8-8.9 5.1 7-6.9Z"/></svg>
+          <h3>Google Play</h3>
+        </div>
+        <p>The game is in Google's review. It is taking longer than we expected, and we're sorry for the wait. The Play Store link will appear right here as soon as it's approved.</p>
+        <span class="btn btn-ghost" aria-disabled="true">Coming soon</span>
+      </div>
+
+      <div class="card dl soon">
+        <span class="state wait">In certification</span>
+        <div class="plat">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 6V5a4 4 0 0 1 8 0v1h4.2l-.9 14.1A2 2 0 0 1 17.3 22H6.7a2 2 0 0 1-2-1.9L3.8 6H8Zm2 0h4V5a2 2 0 1 0-4 0v1Zm-.5 4v3.4h2.3V10H9.5Zm2.7 0v3.4h2.3V10h-2.3Zm-2.7 3.8v3.4h2.3v-3.4H9.5Zm2.7 0v3.4h2.3v-3.4h-2.3Z"/></svg>
+          <h3>Microsoft Store</h3>
+        </div>
+        <p>Microsoft is certifying the game. It is taking a little longer than we hoped, sorry about that. Once it's live, the Store version installs without any warning and updates itself.</p>
+        <span class="btn btn-ghost" aria-disabled="true">Coming soon</span>
+      </div>
+    </div>
+
+    <div class="final notify">
+      <h3>Want the store links?</h3>
+      <p>Leave your email and we'll write once, the moment Psychedelic World is live on Google Play and the Microsoft Store. That mail, and nothing else.</p>
       <form class="signup" id="signup" novalidate>
         <div class="signup-row">
           <input id="email" type="email" name="email" required autocomplete="email"
                  placeholder="you@example.com" aria-label="Your email address">
-          <button class="btn btn-primary" type="submit" id="signup-btn">Send me the link →</button>
+          <button class="btn btn-primary" type="submit" id="signup-btn">Tell me →</button>
         </div>
         <!-- Bots fill in every field they can find. This one is off-screen, so
              anything arriving with it filled is not a person. -->
         <input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <p class="signup-msg" id="signup-msg" role="status" aria-live="polite"></p>
       </form>
+    </div>
+  </div>
+</section>
 
-      <div class="platforms"><span>Windows</span><span>Android</span><span>Free</span></div>
+<section id="install">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Installing from here</p>
+      <h2>Your PC and phone will ask first. That's normal.</h2>
+      <p>Windows and Android warn you about any app that doesn't come from their store yet. Psychedelic World is safe: they just don't know it yet. Once the store versions are out, none of this is needed.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card guide">
+        <h3>Windows</h3>
+        <ol class="steps">
+          <li><b>Extract the zip.</b> Right-click it and choose <em>Extract All</em>. Don't start the game from inside the zip: it won't find its files.</li>
+          <li>Open the folder and double-click <code>PsychedelicWorld.exe</code>.</li>
+          <li>Windows shows a blue box. Click <b>More info</b>, then <b>Run anyway</b>. It only asks the first time.</li>
+        </ol>
+        <!-- A drawing of the SmartScreen box, not a screenshot: lighter, sharp at
+             any size, and nobody else's image. -->
+        <div class="mock win" aria-hidden="true">
+          <div class="mock-t">Windows protected your PC</div>
+          <p>Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.</p>
+          <span class="mock-link hl" data-n="1">More info</span>
+          <p class="mock-small">App: PsychedelicWorld.exe<br>Publisher: Unknown publisher</p>
+          <div class="mock-btns"><span class="mock-btn hl" data-n="2">Run anyway</span><span class="mock-btn">Don't run</span></div>
+        </div>
+      </div>
+
+      <div class="card guide">
+        <h3>Android</h3>
+        <ol class="steps">
+          <li><b>Download the APK.</b> If Chrome says the file might be harmful, tap <b>Download anyway</b>.</li>
+          <li>Open it. The first time, Android asks to allow installs from your browser: tap <b>Settings</b>, turn on <b>Allow from this source</b>, then go back.</li>
+          <li>Tap <b>Install</b>. If Play Protect steps in, tap <b>More details</b>, then <b>Install anyway</b>.</li>
+        </ol>
+        <div class="mocks">
+          <div class="mock droid" aria-hidden="true">
+            <div class="mock-bar">‹ Install unknown apps</div>
+            <div class="mock-app"><span class="mock-ico"></span>Chrome</div>
+            <div class="mock-toggle hl" data-n="1">Allow from this source <span class="sw"></span></div>
+          </div>
+          <div class="mock droid pp" aria-hidden="true">
+            <div class="mock-shield"></div>
+            <div class="mock-t">Play Protect doesn't recognise this app</div>
+            <span class="mock-link">More details ⌄</span>
+            <div class="mock-btns"><span class="mock-btn hl" data-n="2">Install anyway</span></div>
+          </div>
+        </div>
+        <p class="hint">The exact wording changes from phone to phone. When the Google Play version is out, uninstall this one first: the two can't update each other.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -604,8 +759,8 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
   <div class="wrap">
     <div class="row">
       <div><strong>Psychedelic World</strong> — built with Godot 4</div>
-      <div><a href="../">More by Hanet Roberto</a> · <a href="#play">Get the launch link</a> · <a href="privacy.html">Privacy</a></div>
-      <div class="privacy">Your email is only ever used to send the launch link. This page
+      <div><a href="../">More by Hanet Roberto</a> · <a href="#download">Download</a> · <a href="privacy.html">Privacy</a></div>
+      <div class="privacy">Your email is only ever used to tell you when the store versions are out. This page
         carries ads from Google, which may set cookies.</div>
     </div>
     <p class="disclaimer">PsyCrush, PsyLine, PsyPop, PsyRun, PsyChomp, PsyTenis and PsyDanceFloor are original games inspired by arcade genres. They are not affiliated with, endorsed by, or connected to any existing game or trademark holder.</p>
@@ -873,9 +1028,9 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
       body: JSON.stringify({ email: email, source: 'site' })
     }).then(function (r) {
       if (r.status === 201) {
-        done('You are on the list. The link arrives on 25 September.');
+        done('You are on the list. We will write when the stores go live.');
       } else if (r.status === 409) {
-        done('You were already on the list — see you on the 25th.');
+        done('You were already on the list. We will write when the stores go live.');
       } else {
         btn.disabled = false;
         say('err', 'Something went wrong. Try again in a minute.');
