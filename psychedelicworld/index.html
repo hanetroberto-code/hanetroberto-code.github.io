@@ -342,7 +342,7 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
       <a class="btn btn-primary" href="#download">Download free →</a>
       <a class="btn btn-ghost" href="#trailer">Watch the trailer</a>
     </div>
-    <p class="note">Free on Windows and Android. Google Play and Microsoft Store versions are on their way.</p>
+    <p class="note">Free on Windows and Android. Now on the Microsoft Store — Google Play is on its way.</p>
 
     <div class="stats">
       <div class="stat"><b>8</b><span>Minigames</span></div>
@@ -512,7 +512,7 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
     <div class="head">
       <p class="eyebrow">Out now · Free</p>
       <h2>The portals are open</h2>
-      <p>Download Psychedelic World for Windows and Android right here. The store versions are on their way: Google and Microsoft are still reviewing the game.</p>
+      <p>Get Psychedelic World from the Microsoft Store, or download it for Windows and Android right here. The Google Play version is on its way: Google is still reviewing the game.</p>
     </div>
 
     <div class="dl-grid">
@@ -548,20 +548,20 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
         <span class="btn btn-ghost" aria-disabled="true">Coming soon</span>
       </div>
 
-      <div class="card dl soon">
-        <span class="state wait">In certification</span>
+      <div class="card dl">
+        <span class="state live">Available</span>
         <div class="plat">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 6V5a4 4 0 0 1 8 0v1h4.2l-.9 14.1A2 2 0 0 1 17.3 22H6.7a2 2 0 0 1-2-1.9L3.8 6H8Zm2 0h4V5a2 2 0 1 0-4 0v1Zm-.5 4v3.4h2.3V10H9.5Zm2.7 0v3.4h2.3V10h-2.3Zm-2.7 3.8v3.4h2.3v-3.4H9.5Zm2.7 0v3.4h2.3v-3.4h-2.3Z"/></svg>
           <h3>Microsoft Store</h3>
         </div>
-        <p>Microsoft is certifying the game. It is taking a little longer than we hoped, sorry about that. Once it's live, the Store version installs without any warning and updates itself.</p>
-        <span class="btn btn-ghost" aria-disabled="true">Coming soon</span>
+        <p>The easiest way on Windows: one click to install, no security warning, and it updates itself.</p>
+        <a class="btn btn-primary" id="dl-store" href="https://apps.microsoft.com/store/detail/9NV5CL54PWRL?cid=DevShareMCLPCS" target="_blank" rel="noopener">Get it on Microsoft Store →</a>
       </div>
     </div>
 
     <div class="final notify">
-      <h3>Want the store links?</h3>
-      <p>Leave your email and we'll write once, the moment Psychedelic World is live on Google Play and the Microsoft Store. That mail, and nothing else.</p>
+      <h3>Waiting for Google Play?</h3>
+      <p>Leave your email and we'll write once, the moment Psychedelic World is live on Google Play. That mail, and nothing else.</p>
       <form class="signup" id="signup" novalidate>
         <div class="signup-row">
           <input id="email" type="email" name="email" required autocomplete="email"
@@ -582,7 +582,7 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
     <div class="head">
       <p class="eyebrow">Installing from here</p>
       <h2>Your PC and phone will ask first. That's normal.</h2>
-      <p>Windows and Android warn you about any app that doesn't come from their store yet. Psychedelic World is safe: they just don't know it yet. Once the store versions are out, none of this is needed.</p>
+      <p>Windows and Android warn you about any app that doesn't come from their store. Psychedelic World is safe: they just don't know it yet. On Windows you can skip all of this by getting it from the Microsoft Store; on Android, the Google Play version is on its way.</p>
     </div>
 
     <div class="grid g2">
@@ -637,7 +637,7 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
     <div class="row">
       <div><strong>Psychedelic World</strong> — made by Hanet Roberto · music by ZenAi · built with Godot 4 and Claude</div>
       <div><a href="../">More by Hanet Roberto</a> · <a href="#download">Download</a> · <a href="privacy.html">Privacy</a></div>
-      <div class="privacy">Your email is only ever used to tell you when the store versions are out. This page
+      <div class="privacy">Your email is only ever used to tell you when the Google Play version is out. This page
         carries ads from Google, which may set cookies.</div>
     </div>
     <p class="disclaimer">PsyCrush, PsyLine, PsyPop, PsyRun, PsyChomp, PsyTenis and PsyDanceFloor are original games inspired by arcade genres. They are not affiliated with, endorsed by, or connected to any existing game or trademark holder.</p>
@@ -905,9 +905,9 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
       body: JSON.stringify({ email: email, source: 'site' })
     }).then(function (r) {
       if (r.status === 201) {
-        done('You are on the list. We will write when the stores go live.');
+        done('You are on the list. We will write when the game is on Google Play.');
       } else if (r.status === 409) {
-        done('You were already on the list. We will write when the stores go live.');
+        done('You were already on the list. We will write when the game is on Google Play.');
       } else {
         btn.disabled = false;
         say('err', 'Something went wrong. Try again in a minute.');
