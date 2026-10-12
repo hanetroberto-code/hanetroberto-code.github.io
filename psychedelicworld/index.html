@@ -274,41 +274,6 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
 .notify h3{font-size:clamp(1.4rem,3vw,1.9rem)}
 .notify .signup-msg:empty{min-height:0;margin:0}
 
-/* ---------- install guide ---------- */
-/* The warning boxes are drawn, not screenshots: lighter, sharp at any size,
-   and nobody else's image. The pink rings and numbers say where to tap. */
-.steps{margin:6px 0 22px;padding-left:1.3em;color:var(--muted);font-size:.95rem}
-.steps li{margin:0 0 10px}
-.steps b{color:var(--text)}
-.mocks{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-@media(max-width:520px){.mocks{grid-template-columns:1fr}}
-.mock{position:relative;font-family:'Segoe UI',system-ui,sans-serif;font-size:.8rem;line-height:1.45}
-.mock.win{background:#0f5fa6;color:#fff;padding:18px 18px 16px;border-radius:6px;max-width:440px}
-.mock.win .mock-t{font-size:1.2rem;font-weight:600;margin-bottom:8px}
-.mock.win p{margin:0 0 10px;color:#e6f0fb}
-.mock-link{display:inline-block;text-decoration:underline;margin:0 0 10px 4px}
-.mock-small{font-size:.74rem;opacity:.9}
-.mock-btns{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
-.mock-btn{padding:6px 14px;border:1px solid rgba(255,255,255,.7);border-radius:3px}
-.mock.droid{background:#f4f1f8;color:#1b1b1f;padding:16px 14px;border-radius:18px}
-.mock-bar{font-weight:600;margin-bottom:12px}
-.mock-app{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.mock-ico{width:18px;height:18px;border-radius:50%;flex:none;
-  background:conic-gradient(#ea4335 0 33%,#fbbc05 0 66%,#34a853 0);box-shadow:inset 0 0 0 5px #4285f4}
-.mock-toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border-radius:10px;background:#fff}
-.sw{width:34px;height:18px;border-radius:999px;background:#6750a4;position:relative;flex:none}
-.sw::after{content:"";position:absolute;right:3px;top:3px;width:12px;height:12px;border-radius:50%;background:#fff}
-.mock.pp{text-align:center}
-.mock-shield{width:26px;height:30px;margin:2px auto 8px;background:#1a73e8;
-  clip-path:polygon(50% 0,100% 18%,100% 55%,50% 100%,0 55%,0 18%)}
-.mock.pp .mock-t{font-weight:600;margin-bottom:8px}
-.mock.pp .mock-link{color:#1a73e8}
-.mock.pp .mock-btns{justify-content:center}
-.mock.droid .mock-btn{border:0;background:#1a73e8;color:#fff;border-radius:999px}
-.hl{outline:2px solid var(--magenta);outline-offset:3px;border-radius:6px;position:relative}
-.hl::before{content:attr(data-n);position:absolute;left:-13px;top:-13px;width:20px;height:20px;border-radius:50%;
-  background:var(--magenta);color:#fff;font:700 .7rem/20px 'Space Grotesk',sans-serif;text-align:center;
-  box-shadow:0 0 12px rgba(255,45,149,.7)}
 </style>
 </head>
 <body>
@@ -514,39 +479,17 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
     <div class="head">
       <p class="eyebrow">Out now · Free</p>
       <h2>The portals are open</h2>
-      <p>Get Psychedelic World from Google Play or the Microsoft Store, or download it for Windows and Android right here.</p>
+      <p>Free on Google Play for Android and on the Microsoft Store for Windows.</p>
     </div>
 
     <div class="dl-grid">
       <div class="card dl">
         <span class="state live">Available</span>
         <div class="plat">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5.1 10 4v7H3V5.1Zm8-1.25L21 2.5V11H11V3.85ZM3 13h7v7l-7-1.1V13Zm8 0h10v8.5l-10-1.35V13Z"/></svg>
-          <h3>Windows</h3>
-        </div>
-        <p class="meta">Windows 10 / 11 · 64-bit · 433 MB zip</p>
-        <a class="btn btn-primary" id="dl-win" href="https://github.com/hanetroberto-code/hanetroberto-code.github.io/releases/latest/download/PsychedelicWorld-Windows.zip">Download for Windows ↓</a>
-        <p class="hint">Extract the zip first, then run <code>PsychedelicWorld.exe</code>. <a href="#install">How to install</a></p>
-      </div>
-
-      <div class="card dl">
-        <span class="state live">Available</span>
-        <div class="plat">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 9h12v8a2 2 0 0 1-2 2h-1v2.5a1.5 1.5 0 0 1-3 0V19h0v2.5a1.5 1.5 0 0 1-3 0V19H8a2 2 0 0 1-2-2V9Zm-2.5 0A1.5 1.5 0 0 1 5 10.5v5a1.5 1.5 0 0 1-3 0v-5A1.5 1.5 0 0 1 3.5 9Zm17 0a1.5 1.5 0 0 1 1.5 1.5v5a1.5 1.5 0 0 1-3 0v-5A1.5 1.5 0 0 1 20.5 9ZM7.1 3.6l1.05 1.6A6.3 6.3 0 0 1 12 4a6.3 6.3 0 0 1 3.85 1.2l1.05-1.6a.4.4 0 1 1 .67.44l-1.03 1.57A5.9 5.9 0 0 1 18 8H6a5.9 5.9 0 0 1 1.46-2.99L6.43 4.04a.4.4 0 1 1 .67-.44ZM9.5 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg>
-          <h3>Android</h3>
-        </div>
-        <p class="meta">Phones and tablets · 481 MB APK · keep about 1.5 GB free</p>
-        <a class="btn btn-primary" id="dl-apk" href="https://github.com/hanetroberto-code/hanetroberto-code.github.io/releases/latest/download/PsychedelicWorld-Android.apk">Download for Android ↓</a>
-        <p class="hint">Your phone will ask you to allow the install. <a href="#install">How to install</a></p>
-      </div>
-
-      <div class="card dl">
-        <span class="state live">Available</span>
-        <div class="plat">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.2 2.6 13.9 12l-9.7 9.4a1.6 1.6 0 0 1-.7-1.3V3.9c0-.53.26-1 .7-1.3Zm11.2 7.95 2.9 1.65a1 1 0 0 1 0 1.6l-2.9 1.65L12.9 12l2.5-1.45ZM5.6 2.2l8.9 5.1-1.9 1.8L5.6 2.2Zm7 12.7 1.9 1.8-8.9 5.1 7-6.9Z"/></svg>
           <h3>Google Play</h3>
         </div>
-        <p>The easiest way on Android: install it from the store, no warnings, and it updates itself.</p>
+        <p>Phones and tablets. Install it from the store and it updates itself.</p>
         <a class="btn btn-primary" id="dl-play" href="https://play.google.com/store/apps/details?id=com.vibecoding.psychedelicworld&amp;pcampaignid=web_share" target="_blank" rel="noopener">Get it on Google Play →</a>
       </div>
 
@@ -556,64 +499,11 @@ footer .privacy{flex-basis:100%;font-size:.78rem;opacity:.72;max-width:70ch}
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 6V5a4 4 0 0 1 8 0v1h4.2l-.9 14.1A2 2 0 0 1 17.3 22H6.7a2 2 0 0 1-2-1.9L3.8 6H8Zm2 0h4V5a2 2 0 1 0-4 0v1Zm-.5 4v3.4h2.3V10H9.5Zm2.7 0v3.4h2.3V10h-2.3Zm-2.7 3.8v3.4h2.3v-3.4H9.5Zm2.7 0v3.4h2.3v-3.4h-2.3Z"/></svg>
           <h3>Microsoft Store</h3>
         </div>
-        <p>The easiest way on Windows: one click to install, no security warning, and it updates itself.</p>
+        <p>Windows 10 and 11, 64-bit. One click to install, and it updates itself.</p>
         <a class="btn btn-primary" id="dl-store" href="https://apps.microsoft.com/store/detail/9NV5CL54PWRL?cid=DevShareMCLPCS" target="_blank" rel="noopener">Get it on Microsoft Store →</a>
       </div>
     </div>
 
-  </div>
-</section>
-
-<section id="install">
-  <div class="wrap">
-    <div class="head">
-      <p class="eyebrow">Installing from here</p>
-      <h2>Your PC and phone will ask first. That's normal.</h2>
-      <p>Windows and Android warn you about any app that doesn't come from their store. Psychedelic World is safe: they just don't know it yet. You can skip all of this by getting it from Google Play or the Microsoft Store.</p>
-    </div>
-
-    <div class="grid g2">
-      <div class="card guide">
-        <h3>Windows</h3>
-        <ol class="steps">
-          <li><b>Extract the zip.</b> Right-click it and choose <em>Extract All</em>. Don't start the game from inside the zip: it won't find its files.</li>
-          <li>Open the folder and double-click <code>PsychedelicWorld.exe</code>.</li>
-          <li>Windows shows a blue box. Click <b>More info</b>, then <b>Run anyway</b>. It only asks the first time.</li>
-        </ol>
-        <!-- A drawing of the SmartScreen box, not a screenshot: lighter, sharp at
-             any size, and nobody else's image. -->
-        <div class="mock win" aria-hidden="true">
-          <div class="mock-t">Windows protected your PC</div>
-          <p>Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.</p>
-          <span class="mock-link hl" data-n="1">More info</span>
-          <p class="mock-small">App: PsychedelicWorld.exe<br>Publisher: Unknown publisher</p>
-          <div class="mock-btns"><span class="mock-btn hl" data-n="2">Run anyway</span><span class="mock-btn">Don't run</span></div>
-        </div>
-      </div>
-
-      <div class="card guide">
-        <h3>Android</h3>
-        <ol class="steps">
-          <li><b>Download the APK.</b> If Chrome says the file might be harmful, tap <b>Download anyway</b>.</li>
-          <li>Open it. The first time, Android asks to allow installs from your browser: tap <b>Settings</b>, turn on <b>Allow from this source</b>, then go back.</li>
-          <li>Tap <b>Install</b>. If Play Protect steps in, tap <b>More details</b>, then <b>Install anyway</b>.</li>
-        </ol>
-        <div class="mocks">
-          <div class="mock droid" aria-hidden="true">
-            <div class="mock-bar">‹ Install unknown apps</div>
-            <div class="mock-app"><span class="mock-ico"></span>Chrome</div>
-            <div class="mock-toggle hl" data-n="1">Allow from this source <span class="sw"></span></div>
-          </div>
-          <div class="mock droid pp" aria-hidden="true">
-            <div class="mock-shield"></div>
-            <div class="mock-t">Play Protect doesn't recognise this app</div>
-            <span class="mock-link">More details ⌄</span>
-            <div class="mock-btns"><span class="mock-btn hl" data-n="2">Install anyway</span></div>
-          </div>
-        </div>
-        <p class="hint">The exact wording changes from phone to phone. Moving to the Google Play version? Uninstall this one first: the two can't update each other.</p>
-      </div>
-    </div>
   </div>
 </section>
 
