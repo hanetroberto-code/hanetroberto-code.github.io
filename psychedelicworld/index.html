@@ -85,7 +85,7 @@ nav .links a:hover{color:var(--text)}
   border:1px solid var(--line);background:rgba(157,92,255,.1);font-size:.8rem;letter-spacing:.1em;
   text-transform:uppercase;font-weight:700;color:var(--cyan);margin-bottom:26px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime)}
-.hero h1{font-size:clamp(2.9rem,9.2vw,6.4rem);text-transform:uppercase}
+.hero h1{font-size:clamp(1.4rem,7.3vw,5.6rem);text-transform:uppercase}  /* "PSYCHEDELIC" is ~11.9em wide in Syne 800: this keeps it inside the 92vw wrap */
 .hero h1 .g{background:linear-gradient(96deg,var(--magenta),var(--amber) 30%,var(--lime) 55%,var(--cyan) 78%,var(--violet));
   -webkit-background-clip:text;background-clip:text;color:transparent;
   background-size:220% 100%;animation:hue 12s linear infinite}
@@ -105,7 +105,7 @@ nav .links a:hover{color:var(--text)}
 
 /* ---------- section head ---------- */
 .head{max-width:70ch;margin-bottom:52px}
-.head h2{font-size:clamp(2rem,4.6vw,3.1rem)}
+.head h2{font-size:max(min(2rem,8.6vw),min(4.6vw,3.1rem))}  /* below ~370px it shrinks so "kaleidoscope" (~10.5em) fits */
 .head p{margin-top:16px;color:var(--muted)}
 
 /* ---------- cards ---------- */
